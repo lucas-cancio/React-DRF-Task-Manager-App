@@ -1,0 +1,40 @@
+.custom-navbar {
+    background-color: beige;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: black;
+
+    border-radius: 5px;
+    border-style:solid;
+    border-width: 1px;
+    margin: 0px;
+    padding: 0px;    
+}
+
+.navbar-link:hover {
+    background-color: orange;
+}
+
+.navbar-button {
+    background-color: inherit;
+    color: black;
+
+    border-radius: 5px;
+    border-style:solid;
+    border-width: 1px;
+    margin: 0px;
+    padding: 0px;    
+}
+
+.navbar-button:hover {
+    background-color: orange;
+}
+
+.navbar-link-text {
+    text-align: center;
+    margin: 5px 10px;
+    padding: 0px;
+}
+
