@@ -1,13 +1,16 @@
-// src/auth.js
-import api from './api/axios';
+import api from '../axios';
 
-// Function to log in and obtain JWT and refresh token
-export const login = (username, password) => {
+export const getJWToken = ({username, password}) => {
     return new Promise((resolve, reject) => {
-        api.post('/api/token/', { username, password })
+
+        api.post('/api/token/', { username, password }, {
+            'headers': {
+                'Require-Auth': false,
+            }
+        })
             .then((response) => {
-                localStorage.setItem('token', response.data.access);
-                localStorage.setItem('refreshToken', response.data.refresh);
+                sessionStorage.setItem('token', response.data.access);
+                sessionStorage.setItem('refreshToken', response.data.refresh);
                 resolve(response.data);
             })
             .catch((error) => {
@@ -20,10 +23,9 @@ export const login = (username, password) => {
     });
 };
 
-// Function to refresh JWT using refresh token
-export const refreshToken = () => {
+export const refreshJWToken = () => {
     return new Promise((resolve, reject) => {
-        const refreshToken = localStorage.getItem('refreshToken');
+        const refreshToken = sessionStorage.getItem('refreshToken');
         if (!refreshToken) {
             reject(new Error('Refresh token not found.'));
             return;
@@ -31,7 +33,7 @@ export const refreshToken = () => {
 
         api.post('/api/token/refresh/', { refresh: refreshToken })
             .then((response) => {
-                localStorage.setItem('token', response.data.access);
+                sessionStorage.setItem('token', response.data.access);
                 resolve(response.data.access);
             })
             .catch((error) => {

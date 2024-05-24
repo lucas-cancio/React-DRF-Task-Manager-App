@@ -10,14 +10,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'first_name', 'last_name']
 
 class SubtaskSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Subtask
-        fields = ['title', 'description', 'deadline', 'completed',]
+        fields = ['id', 'title', 'description', 'deadline', 'completed', 'parentTask',]
 
 class TaskSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = serializers.ReadOnlyField(source='user.id')
     subtasks = SubtaskSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
-        fields = ['title', 'description', 'deadline', 'completed', 'user', 'subtasks']
+        fields = ['id', 'title', 'description', 'deadline', 'completed', 'user', 'subtasks']

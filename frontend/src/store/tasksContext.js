@@ -1,7 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 
 const TasksContext = createContext(null);
-
 const TasksDispatchContext = createContext(null);
 
 export function TasksProvider({children}) {
@@ -35,7 +34,7 @@ function tasksReducer(tasks, action) {
             return tasks.map((task) => {
                 if (task.id == action.task.id) {
                     return {
-                        'id': action.task.id,
+                        'id': task.id,
                         'title': action.task.title,
                         'description': action.task.description,
                         'deadline': action.task.deadline,
@@ -45,7 +44,10 @@ function tasksReducer(tasks, action) {
                 } else {
                     return task;
                 }
-            })
+            });
+        }
+        case 'createTask': {
+            return [...tasks, action.task];
         }
         case 'deleteTask': {
             return tasks.filter(task => task.id != action.id);

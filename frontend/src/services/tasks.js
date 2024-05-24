@@ -1,11 +1,19 @@
-import axios from "axios";
+import api from "./axios";
 
-const getTasks = () => {
+const getTasks = (csrfToken) => {
 
     return new Promise((resolve, reject) => {
-        axios.get("http://localhost:8000/api/tasks/")
-            .then((res) => resolve(res.data))
-            .catch((err) => reject(err));
+        api.get("/api/tasks/", {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken,
+                    "Require-Auth": true,
+                },
+                withCredentials: true,
+            }
+        )
+        .then((res) => resolve(res.data))
+        .catch((err) => reject(err));
     });
 }
 
@@ -21,12 +29,13 @@ const createTask = (_task, csrfToken) => {
     const subtasks = _task.subtasks;
 
     return new Promise((resolve, reject) => {
-        axios.post("http://locallhost:8000/api/tasks/", 
+        api.post("/api/tasks/", 
             task,
             {
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
+                    "Require-Auth": true,
                 },
                 withCredentials: true,
             }
@@ -46,15 +55,18 @@ const editTask = (_task, csrfToken) => {
         'completed': _task.completed,
     };
 
-    const subtasks = _task.subtasks;
+    // const subtasks = _task.subtasks;
 
     return new Promise((resolve, reject) => {
-        axios.put(`http://localhost:8000/api/tasks/${task.id}/`,
+        console.log("EDIT DISPATCH TASK ID: " + task.id);
+
+        api.put(`/api/tasks/${task.id}/`,
             task,
             {
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
+                    "Require-Auth": true,
                 },
                 withCredentials: true,
             }
@@ -62,17 +74,55 @@ const editTask = (_task, csrfToken) => {
         .then((res) => resolve(res.data))
         .catch((err) => reject(err));
     });
-
 }
 
 const deleteTask = (taskID, csrfToken) => {
 
     return new Promise((resolve, reject) => {
-        axios.delete(`http://localhost:8000/api/tasks/${taskID}/`,
+        api.delete(`/api/tasks/${taskID}/`,
             {
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
+                    "Require-Auth": true,
+                },
+                withCredentials: true,
+            }
+        )
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    })
+}
+
+const createSubtask = (subtask, csrfToken) => {
+
+    return new Promise((resolve, reject) => {
+        api.post("/api/subtasks/", 
+            subtask,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken,
+                    "Require-Auth": true,
+                },
+                withCredentials: true,
+            }
+        )
+        .then((res) => resolve(res.data))
+        .catch((err) => reject(err));
+    })
+}
+
+
+const deleteSubtask = (subtaskID, csrfToken) => {
+
+    return new Promise((resolve, reject) => {
+        api.delete(`/api/subtasks/${subtaskID}/`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken,
+                    "Require-Auth": true,
                 },
                 withCredentials: true,
             }
@@ -82,4 +132,31 @@ const deleteTask = (taskID, csrfToken) => {
     })
 }
 
-export {getTasks, createTask, editTask, deleteTask};
+const editSubtask = (subtask, csrfToken) => {
+
+    return new Promise((resolve, reject) => {
+        api.put(`/api/subtasks/${subtask.id}/`,
+        subtask,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+                "Require-Auth": true,
+            },
+            withCredentials: true,
+        }
+    )
+    .then((res) => resolve(res.data))
+    .catch((err) => reject(err));
+    });
+};
+
+export {
+    getTasks, 
+    createTask,
+    editTask, 
+    deleteTask, 
+    createSubtask,
+    deleteSubtask,
+    editSubtask,
+};

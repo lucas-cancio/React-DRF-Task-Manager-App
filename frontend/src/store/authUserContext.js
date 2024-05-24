@@ -1,5 +1,6 @@
 
-import axios from "axios";
+// import axios from "axios";
+import api from "../services/axios";
 import { createContext, useReducer, useContext, useState, useEffect } from "react";
 
 const AuthUserContext = createContext(null);
@@ -10,7 +11,10 @@ export function AuthUserProvider({children}) {
     const [user, dispatch] = useReducer(authUserReducer, null);
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/getSession/", {
+        api.get("/api/getSession/", {
+            headers: { 
+                'Require-Auth': true,
+            },
             withCredentials: true,
         })
         .then((res) => {

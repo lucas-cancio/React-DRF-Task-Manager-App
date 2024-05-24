@@ -1,13 +1,18 @@
-import axios from "axios";
+import api from '../axios';
 
 export default function LogOut({authUserDispatch, csrfTokenSetter}) {
-    axios.get("http://localhost:8000/api/logout/",
+    api.get("/api/logout/",
         {
+            headers: {
+                "Require-Auth": false,
+            },
             withCredentials: true,
         }
     )
     .then((res) => {
         console.log("Successfully logged out.");
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('refreshToken');
         authUserDispatch({
             type: "logout",
         })

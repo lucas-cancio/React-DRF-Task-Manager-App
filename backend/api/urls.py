@@ -8,6 +8,7 @@ from . import views
 
 router = DefaultRouter()
 router.register(r'tasks', views.TasksViewSet, 'task')
+router.register(r'subtasks', views.SubtasksViewSet, 'subtask')
 
 urlpatterns = [
     path('logout/', views.logoutView, name='logout'),
@@ -20,8 +21,8 @@ urlpatterns = [
     path('getCSRFToken/', views.GetCSRFToken.as_view(), name='getCSRF'),
     path('getSession/', views.GetSession.as_view(), name='getSession'),
 
-    path('jwtToken/', TokenObtainPairView.as_view(), name='jwt_token_obtain_pair'),
-    path('jwtToken/refresh/', TokenRefreshView.as_view(), name="jwt_token_refresh"),
+    path('token/', TokenObtainPairView.as_view(), name='jwt_token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name="jwt_token_refresh"),
     
     path('', include(router.urls)),
 ]

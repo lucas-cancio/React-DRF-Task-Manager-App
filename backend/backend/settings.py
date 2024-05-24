@@ -10,20 +10,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from datetime import timedelta
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t$$@ky=dmj%7opzf4#ab_za1njx^ti+&fg(tej+x3^mr$@)p8$'
+SECRET_KEY = os.getenv('DJANGO_JWT_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -133,8 +139,21 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     'http://localhost:3000',
 #     'http://127.0.0.1:3000',
 # ]
-CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken',]
+
+CORS_EXPOSE_HEADERS = [
+    'Content-Type',
+    'X-CSRFToken', 
+]
+
+CORS_ALLOW_HEADERS = [
+    'Content-Type',
+    'X-CSRFToken',
+    'Authorization',
+    'Require-Auth',
+]
+
 CORS_ALLOW_CREDENTIALS = True
+
 
 
 CSRF_COOKIE_SAMESITE = 'None'
@@ -176,8 +195,8 @@ LOGGING = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': 36000,
-    'REFRESH_TOKEN_LIFETIME': 36000,
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',

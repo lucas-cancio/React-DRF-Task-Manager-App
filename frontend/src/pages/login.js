@@ -7,9 +7,9 @@ import { useCSRFToken, useCSRFTokenSetter } from "../store/csrfContext";
 import { GetCSRFToken } from "../services/getCSRFToken";
 
 import { useAuthUserDispatch } from "../store/authUserContext";
-import RequestLogin from "../services/auth/login";
+import { requestLogin } from "../services/auth/login";
 
-import tokenAPI from "../services/auth/token";
+ import { getJWToken } from "../services/auth/token";
 
 const LoginPage = () => {
 
@@ -32,7 +32,7 @@ const LoginPage = () => {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        RequestLogin({
+        requestLogin({
             username: username,
             password: password,
             csrfToken: csrfToken,
@@ -40,7 +40,19 @@ const LoginPage = () => {
         })
         .then((data) => {
             console.log("Login successful.");
-            navigate("/dashboard");
+
+            getJWToken({
+                username: username,
+                password: password,
+            })
+            .then((res) => {
+                console.log(res);
+                navigate("/dashboard");
+            })
+            .catch((err) => {
+                console.log(err);
+                console.log("Forcing user logout");
+            });
         })
         .catch((error) => {
             console.error("Login failed: ", error);
@@ -57,7 +69,7 @@ const LoginPage = () => {
 
     return (
         <Layout>
-            <h1>Login Page</h1>
+            <h1 className="mt-5 pt-5">Login Page</h1>
             <div>
                 <form onSubmit={handleLogin}>
                     <div>

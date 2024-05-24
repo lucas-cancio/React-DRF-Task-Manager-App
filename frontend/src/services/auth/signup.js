@@ -1,9 +1,9 @@
-import axios from "axios";
+import api from "../axios";
 
 export default function SignUp({firstName, lastName, email, username, password, csrfToken}) {
     
     return new Promise((resolve, reject) => {
-        axios.post("http://localhost:8000/api/signup/", 
+        api.post("/api/signup/", 
             {
                 "firstName": firstName,
                 "lastName": lastName,
@@ -14,6 +14,7 @@ export default function SignUp({firstName, lastName, email, username, password, 
                headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": csrfToken,
+                "Require-Auth": false,
             }, withCredentials: true,
             }
         ).then((res) => {

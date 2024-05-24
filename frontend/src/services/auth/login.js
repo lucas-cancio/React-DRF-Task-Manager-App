@@ -1,19 +1,18 @@
-import axios from 'axios';
-import tokenAPI from './token';
+import api from '../axios';
 import isResponseOK from '../../utils/checkResponseStatus';
-// import GetAuthToken from './token';
 
-export const RequestLogin = ({username, password, csrfToken, authUserDispatch}) => {
+export const requestLogin = ({username, password, csrfToken, authUserDispatch}) => {
 
     return new Promise((resolve, reject) => {
 
-        axios.post("http://localhost:8000/api/login/", {
+        api.post("/api/login/", {
                 "username": username,
                 "password": password,
             }, {
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRFToken": csrfToken,
+                    "X-CSRFToken": csrfToken, 
+                    "Require-Auth": false,
                 },
                 withCredentials: true,
             } )
@@ -36,5 +35,3 @@ export const RequestLogin = ({username, password, csrfToken, authUserDispatch}) 
             });
     })
 }
-
-export const RequestTokenLogin = async ({username, password, csrfToken, })
