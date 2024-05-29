@@ -30,6 +30,9 @@ function tasksReducer(tasks, action) {
         case 'resetTasks': {
             return action.tasks;
         }
+        case 'createTask': {
+            return [...tasks, action.task];
+        }
         case 'editTask': {
             return tasks.map((task) => {
                 if (task.id == action.task.id) {
@@ -46,19 +49,55 @@ function tasksReducer(tasks, action) {
                 }
             });
         }
-        case 'createTask': {
-            return [...tasks, action.task];
-        }
         case 'deleteTask': {
-            return tasks.filter(task => task.id != action.id);
+            return tasks.filter(task => task.id !== action.id);
+        }
+        case 'createSubtask': {
+            return tasks.map((task) => {
+
+                if (task.id !== action.subtask.parentTask) {
+                    return task;
+                }
+
+                if (task.subtasks.includes(action.subtask)) return task;
+
+                let editedTask = task;
+                editedTask.subtasks = [...task.subtasks, action.subtask];
+                return editedTask;
+            });
+        }
+        case 'editSubtask': {
+            if (action.subtask == null) {
+                console.log("Subtask not provided.");
+                return tasks;
+            }
+
+            return tasks.map((task) => {
+                if (task.id !== action.subtask.parentTask) {
+                    return task;
+                } 
+                let editedTask = task;
+                editedTask.subtasks = editedTask.subtasks.map((subtask) => {
+                    if (subtask.id !== action.subtask.id) {
+                        return subtask;
+                    }
+                    return action.subtask;
+                });
+                return editedTask;
+            });
+        }
+        case 'deleteSubtask': {
+            return tasks.map((task) => {
+                if (task.id !== action.subtask.parentTask) {
+                    return task;
+                }
+                let editedTask = task;
+                editedTask.subtasks = editedTask.subtasks.filter((subtask) => subtask.id !== action.subtask.id);
+                return editedTask;
+            });
         }
         default: {
             return tasks;
         }
     }
-}
-
-// Task
-    // ID, Title, Description, Deadline, Completed
-    // Subtasks[]
-        // ID, Title, Description, Deadline, Completed
+};

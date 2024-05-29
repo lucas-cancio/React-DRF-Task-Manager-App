@@ -15,7 +15,7 @@ const getTasks = (csrfToken) => {
         .then((res) => resolve(res.data))
         .catch((err) => reject(err));
     });
-}
+};
 
 const createTask = (_task, csrfToken) => {
 
@@ -25,8 +25,6 @@ const createTask = (_task, csrfToken) => {
         'deadline': _task.deadline,
         'completed': _task.completed,
     };
-
-    const subtasks = _task.subtasks;
 
     return new Promise((resolve, reject) => {
         api.post("/api/tasks/", 
@@ -42,8 +40,8 @@ const createTask = (_task, csrfToken) => {
         )
         .then((res) => resolve(res.data))
         .catch((err) => reject(err));
-    })
-}
+    });
+};
 
 const editTask = (_task, csrfToken) => {
 
@@ -54,8 +52,6 @@ const editTask = (_task, csrfToken) => {
         'deadline': _task.deadline,
         'completed': _task.completed,
     };
-
-    // const subtasks = _task.subtasks;
 
     return new Promise((resolve, reject) => {
         console.log("EDIT DISPATCH TASK ID: " + task.id);
@@ -74,7 +70,7 @@ const editTask = (_task, csrfToken) => {
         .then((res) => resolve(res.data))
         .catch((err) => reject(err));
     });
-}
+};
 
 const deleteTask = (taskID, csrfToken) => {
 
@@ -91,11 +87,10 @@ const deleteTask = (taskID, csrfToken) => {
         )
         .then((res) => resolve(res))
         .catch((err) => reject(err));
-    })
-}
+    });
+};
 
 const createSubtask = (subtask, csrfToken) => {
-
     return new Promise((resolve, reject) => {
         api.post("/api/subtasks/", 
             subtask,
@@ -110,8 +105,8 @@ const createSubtask = (subtask, csrfToken) => {
         )
         .then((res) => resolve(res.data))
         .catch((err) => reject(err));
-    })
-}
+    });
+};
 
 
 const deleteSubtask = (subtaskID, csrfToken) => {
@@ -129,8 +124,8 @@ const deleteSubtask = (subtaskID, csrfToken) => {
         )
         .then((res) => resolve(console.log(res)))
         .catch((err) => reject(err));
-    })
-}
+    });
+};
 
 const editSubtask = (subtask, csrfToken) => {
 

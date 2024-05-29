@@ -1,58 +1,68 @@
 import { useState } from "react";
+
+import { useTasks, useTasksDispatch } from "../../store/tasksContext";
+import { useCSRFToken } from "../../store/csrfContext";
+import { editSubtask, deleteSubtask } from "../../services/tasks";
+
 import "./subtask.css"
 
-export default function Subtask({subtask, handleEditSubtask, handleDeleteSubtask, inEditMode=false}) {
+export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=false}) {
+
+    const tasksDispatch = useTasksDispatch();
+    const csrfToken = useCSRFToken();
 
     const handleTitleChange = (event) => {
         event.preventDefault();
-
-        handleEditSubtask(
-            subtask.id,
-            event.target.value,
-            subtask.completed,
-            subtask.deadline,
-            subtask.description,
-        );
+        let editedSubtask = {...subtask, title: event.target.value};
+        tasksDispatch({
+            'type': 'editSubtask',
+            'subtask': editedSubtask,
+        });
+        updateEditedSubtaskList(subtask.id);
     };
 
     const handleCompletedChange = (event) => {
-        handleEditSubtask(
-            subtask.id,
-            subtask.title,
-            event.target.checked,
-            subtask.deadline,
-            subtask.description,
-            true,
-        );
+        let editedSubtask = {...subtask, completed: event.target.checked};
+        editSubtask(editedSubtask, csrfToken)
+        .then((res) => {
+            tasksDispatch({
+                'type': 'editSubtask',
+                'subtask': res,
+            });
+        })
+        .catch((err) => console.log(err));
     };
 
     const handleDeadlineChange = (event) => {
         event.preventDefault();
-
-        handleEditSubtask(
-            subtask.id,
-            subtask.title,
-            subtask.completed,
-            event.target.value,
-            subtask.description,
-        );
+        let editedSubtask = {...subtask, deadline: event.target.value};
+        tasksDispatch({
+            'type': 'editSubtask',
+            'subtask': editedSubtask,
+        });
+        updateEditedSubtaskList(subtask.id);
     };
 
     const handleDescriptionChange = (event) => {
         event.preventDefault();
-
-        handleEditSubtask(
-            subtask.id,
-            subtask.title,
-            subtask.completed,
-            subtask.deadline,
-            event.target.value,
-        );
+        let editedSubtask = {...subtask, description: event.target.value};
+        tasksDispatch({
+            'type': 'editSubtask',
+            'subtask': editedSubtask,
+        });
+        updateEditedSubtaskList(subtask.id);
     };
 
-    const handleDeleteSubtaskBtnClick = (event) => {
+    const handleDeleteSubtask = (event) => {
         event.preventDefault();
-        handleDeleteSubtask(subtask.id);
+        deleteSubtask(subtask.id, csrfToken)
+        .then((res) => {
+            tasksDispatch({
+                'type': 'deleteSubtask',
+                'subtask': subtask,
+            });
+        })
+        .catch((err) => console.log(err));
     };
 
     return (
@@ -91,7 +101,7 @@ export default function Subtask({subtask, handleEditSubtask, handleDeleteSubtask
                                     <input id={`subtask-#${subtask.id}-deadline`} type="date" value={subtask.deadline} onChange={handleDeadlineChange}></input>
                                 </div>
                                 <div className="">
-                                    <button title="Delete subtask" onClick={handleDeleteSubtaskBtnClick}>
+                                    <button title="Delete subtask" onClick={handleDeleteSubtask}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                                             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>

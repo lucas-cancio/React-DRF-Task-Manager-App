@@ -7,29 +7,25 @@ import Subtask from "../subtask/subtask";
 import { useTasksDispatch } from "../../store/tasksContext";
 import { useCSRFToken, useCSRFTokenSetter } from "../../store/csrfContext";
 import { GetCSRFToken } from "../../services/getCSRFToken";
-import { editTask, editSubtask, createSubtask, deleteSubtask } from "../../services/tasks";
+import { editTask, deleteTask, editSubtask, createSubtask, deleteSubtask } from "../../services/tasks";
 
 
-export default function Task({task, handleDeleteTask}) {
+export default function Task({task}) {
 
     const tasksDispatch = useTasksDispatch();
     const csrfToken = useCSRFToken();
-    const csrfTokenSetter = useCSRFTokenSetter();
 
-    const [completed, setCompleted] = useState(task.completed);
     const [subtasksEdited, setSubtasksEdited] = useState([]);
     const [inEditMode, setInEditMode] = useState(false);
 
     // Get CSRF token
-    useEffect(() => {
-        GetCSRFToken({csrfToken, csrfTokenSetter});
-    }, []);
+    // useEffect(() => {
+    //     GetCSRFToken({csrfToken, csrfTokenSetter});
+    // }, [csrfToken, csrfTokenSetter]);
 
     const handleChangeTitle = (event) => {
         event.preventDefault();
-
-        const editedTask = task;
-        editedTask.title = event.target.value;
+        const editedTask = { ...task, title: event.target.value };
         tasksDispatch({
             'type': 'editTask',
             'task': editedTask,
@@ -38,9 +34,7 @@ export default function Task({task, handleDeleteTask}) {
 
     const handleChangeDeadline = (event) => {
         event.preventDefault();
-
-        const editedTask = task;
-        editedTask.deadline = event.target.value;
+        const editedTask = { ...task, deadline: event.target.value };
         tasksDispatch({
             'type': 'editTask',
             'task': editedTask,
@@ -49,9 +43,7 @@ export default function Task({task, handleDeleteTask}) {
 
     const handleChangeDescription = (event) => {
         event.preventDefault();
-
-        const editedTask = task;
-        editedTask.description = event.target.value;
+        const editedTask = { ...task, description: event.target.value };
         tasksDispatch({
             'type': 'editTask',
             'task': editedTask,
@@ -59,10 +51,7 @@ export default function Task({task, handleDeleteTask}) {
     };
 
     const handleChangeCompleted = (event) => {
-
-        const editedTask = task;
-        editedTask.completed = event.target.checked;
-        
+        const editedTask = { ...task, completed: event.target.checked };
         editTask(editedTask, csrfToken)
         .then((res) => {
             tasksDispatch({
@@ -73,10 +62,16 @@ export default function Task({task, handleDeleteTask}) {
         .catch((err) => console.error(err));
     };
 
-
-    const handleDeleteTaskBtnClick = (event) => {
+    const handleDeleteTask = (event) => {
         event.preventDefault();
-        handleDeleteTask(task.id);
+        
+        deleteTask(task.id, csrfToken)
+        .then((res) => {
+            tasksDispatch({
+                'type': 'deleteTask',
+                'id': task.id,
+            });
+        });
     };
     
     const toggleEditMode = (event) => {
@@ -118,82 +113,18 @@ export default function Task({task, handleDeleteTask}) {
 
         createSubtask(newSubtask, csrfToken)
         .then((res) => {
-            console.log(res);
-            const editedTask = task;
-            editedTask.subtasks.push(res);
             tasksDispatch({
-                'type': 'editTask',
-                'task': editedTask,
+                'type': 'createSubtask',
+                'subtask': res,
             });
         })
         .catch((err) => console.log(err));
     };
 
-    const handleDeleteSubtask = (subtaskID) => {
-        deleteSubtask(subtaskID, csrfToken)
-        .then((res) => {
-            const editedTask = task;
-            editedTask.subtasks = editedTask.subtasks.filter(subtask => subtask.id != subtaskID);
-            tasksDispatch({
-                'type': 'editTask',
-                'task': editedTask,
-            });
-        })
-        .catch((err) => console.error(err));
-    };
-
-    const handleEditSubtask = (
-            subtaskID,
-            subtaskTitle,
-            subtaskCompleted,
-            subtaskDeadline,
-            subtaskDescription,
-            immediate=false,
-        ) => {
-
-        let doUpdateTaskState = true;
-
-        if (immediate) {
-            const editedSubtask = {
-                'id': subtaskID,
-                'title': subtaskTitle,
-                'completed': subtaskCompleted,
-                'deadline': subtaskDeadline,
-                'description': subtaskDescription,
-                'parentTask': task.id,
-            };
-            editSubtask(editedSubtask, csrfToken)
-            .then((res) => console.log(res))
-            .catch((err) => {
-                console.error(err);
-                doUpdateTaskState = false;
-            })
-        } else if (!subtasksEdited.includes(subtaskID)) {
+    const updateEditedSubtaskList = (subtaskID) => {
+        if (!subtasksEdited.includes(subtaskID)) {
             subtasksEdited.push(subtaskID);
         }
-
-        if (!doUpdateTaskState) 
-            return;
-
-        const editedTask = task;
-        editedTask.subtasks = editedTask.subtasks.map((subtask) => {
-            if (subtask.id == subtaskID) {
-                return {
-                    'parentTask': task.id,
-                    'id': subtaskID,
-                    'title': subtaskTitle,
-                    'completed': subtaskCompleted,
-                    'deadline': subtaskDeadline,
-                    'description': subtaskDescription,
-                };
-            } else {
-                return subtask;
-            }
-        });
-        tasksDispatch({
-            'type': 'editTask',
-            'task': editedTask,
-        });
     };
 
     const renderSubtasks = () => {
@@ -201,8 +132,7 @@ export default function Task({task, handleDeleteTask}) {
                 <li key={subtask.id} style={{width: 100 + "%", listStyle: 'none'}}>
                     <Subtask 
                         subtask={subtask} 
-                        handleEditSubtask={handleEditSubtask} 
-                        handleDeleteSubtask={handleDeleteSubtask}
+                        updateEditedSubtaskList={updateEditedSubtaskList}
                         inEditMode={inEditMode} />
                 </li>
         ));
@@ -301,7 +231,7 @@ export default function Task({task, handleDeleteTask}) {
                                     )}
                                 </div>
                                 <div className="mx-2">
-                                    <button title="Delete task" onClick={handleDeleteTaskBtnClick}>
+                                    <button title="Delete task" onClick={handleDeleteTask}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                                             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>

@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import Task from "../components/task/task";
 import { useContext, useEffect } from "react";
 
-import { getTasks, createTask, editTask, deleteTask, createSubtask, editSubtask, deleteSubtask } from "../services/tasks";
+import { getTasks, createTask, deleteTask } from "../services/tasks";
 import { useTasks, useTasksDispatch } from "../store/tasksContext";
 
 import { useCSRFToken, useCSRFTokenSetter } from "../store/csrfContext";
@@ -21,13 +21,12 @@ const DashboardPage = () => {
     // Get CSRF token
     useEffect(() => {
         GetCSRFToken({csrfToken, csrfTokenSetter});
+        refreshTasks(csrfToken);
     }, [])
 
-    // Get tasks once CSRF token is set
-    useEffect(() => {
-        refreshTasks(csrfToken);
-    }, [csrfToken]);
-
+    // // Get tasks once CSRF token is set
+    // useEffect(() => {
+    // }, [csrfToken]);
 
     const refreshTasks = () => {
         getTasks()
@@ -42,7 +41,6 @@ const DashboardPage = () => {
             console.log(err);
         });
     };
-
 
     const handleCreateNewTask = (e) => {
         e.preventDefault();
@@ -66,23 +64,10 @@ const DashboardPage = () => {
         .catch((err) => console.error(err));
     };
 
-
-    const handleDeleteTask = (taskID) => {
-        deleteTask(taskID, csrfToken)
-        .then((res) => {
-            tasksDispatch({
-                'type': 'deleteTask',
-                'id': taskID,
-            });
-        })
-        .catch((err) => console.error(err));
-    };
-
     const renderTasks = () => {
         return tasks.map((task) => (
             <Task key={task.id} 
-                task={task} 
-                handleDeleteTask={handleDeleteTask}></Task>
+                task={task} ></Task>
         ));
     };
 
