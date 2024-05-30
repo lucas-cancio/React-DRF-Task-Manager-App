@@ -1,0 +1,11 @@
+.layout-root.light {
+    background-color:cornsilk;
+    color: black;
+    min-height: 100vh;
+}
+
+.layout-root.dark {
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+}

@@ -5,7 +5,7 @@ import SignUp from "../services/auth/signup";
 import { useCSRFToken, useCSRFTokenSetter } from "../store/csrfContext";
 import { GetCSRFToken } from "../services/getCSRFToken";
 
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 
 const SignUpPage = () => {
 

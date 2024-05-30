@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 
 import { useEffect, useState } from "react";
 import { useCSRFToken, useCSRFTokenSetter } from "../store/csrfContext";

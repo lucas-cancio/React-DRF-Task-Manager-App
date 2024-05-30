@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useAuthUser } from "../store/authUserContext";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 
 const LandingPage = () => {
     

@@ -1,5 +1,11 @@
-.my-card {
+.my-card.light {
     background-color: orange;
-    
     border-radius: 20px;
+    overflow: hidden;
+}
+
+.my-card.dark {
+    background-color: darkviolet;
+    border-radius: 20px;
+    overflow: hidden;
 }

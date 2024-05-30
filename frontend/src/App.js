@@ -10,25 +10,27 @@ import DashboardPage from './pages/dashboard';
 import NotFoundPage from './pages/notFound';
 import LandingPage from './pages/landing';
 import SignUpPage from './pages/signup';
-
+import { ThemeProvider } from './store/themeContext';
 function App() {
 
     return (
-        <AuthUserProvider>
-            <CSRFTokenProvider>
-                <Routes>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/login/" element={<LoginPage />} />
-                    <Route path="/signup/" element={<SignUpPage />} />
-                    <Route path="/dashboard/" element={
-                        <TasksProvider>
-                            <DashboardPage />
-                        </TasksProvider> 
-                    } />
-                    <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-            </CSRFTokenProvider>
-        </AuthUserProvider>
+        <ThemeProvider>
+            <AuthUserProvider>
+                <CSRFTokenProvider>
+                    <Routes>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/login/" element={<LoginPage />} />
+                        <Route path="/signup/" element={<SignUpPage />} />
+                        <Route path="/dashboard/" element={
+                            <TasksProvider>
+                                <DashboardPage />
+                            </TasksProvider> 
+                        } />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                </CSRFTokenProvider>
+            </AuthUserProvider>
+        </ThemeProvider>
     );
 }
 

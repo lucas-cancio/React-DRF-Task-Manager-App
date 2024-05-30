@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import Task from "../components/task/task";
 import { useContext, useEffect } from "react";
 
@@ -32,13 +32,18 @@ const DashboardPage = () => {
         getTasks()
         .then((_tasks) => {
             console.log(_tasks);
-            tasksDispatch({
-                type: 'resetTasks',
-                tasks: _tasks,
-            })
+            sortTasksByDeadline(_tasks);
         })
         .catch((err) => {
             console.log(err);
+        });
+    };
+
+    const sortTasksByDeadline = (_tasks) => {
+        const sortedTasks = [..._tasks].sort((a,b) => new Date(a.deadline) - new Date(b.deadline));
+        tasksDispatch({
+            type: 'resetTasks',
+            tasks: sortedTasks,
         });
     };
 
@@ -73,7 +78,7 @@ const DashboardPage = () => {
 
     return (
         <Layout>
-            <div className='container-fluid d-flex vh-100 justify-content-center'>
+            <div className='container-fluid d-flex  justify-content-center'>
                 <div className="d-flex flex-column col-md-12 col-lg-6 text-center">
                     <h1 className="mt-5 my-3 pt-5">
                         <strong>

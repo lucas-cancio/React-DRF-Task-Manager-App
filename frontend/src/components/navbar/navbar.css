@@ -1,12 +1,12 @@
-.custom-navbar {
-    background-color: beige;
+.custom-navbar.light{
+    background-color:bisque;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
 }
 
-.navbar-link {
+.navbar-link.light{
     text-decoration: none;
     color: black;
 
@@ -17,11 +17,11 @@
     padding: 0px;    
 }
 
-.navbar-link:hover {
+.navbar-link:hover.light{
     background-color: orange;
 }
 
-.navbar-button {
+.navbar-button.light{
     background-color: inherit;
     color: black;
 
@@ -32,13 +32,61 @@
     padding: 0px;    
 }
 
-.navbar-button:hover {
+.navbar-button:hover.light{
     background-color: orange;
 }
 
-.navbar-link-text {
+.navbar-link-text.light{
     text-align: center;
     margin: 5px 10px;
     padding: 0px;
 }
 
+
+
+.custom-navbar.dark{
+    background-color: grey;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.navbar-link.dark{
+    text-decoration: none;
+    color: white;
+
+    border-radius: 5px;
+    border-style:solid;
+    border-width: 1px;
+    border-color: black;
+
+    margin: 0px;
+    padding: 0px;    
+}
+
+.navbar-link:hover.dark{
+    background-color: darkviolet;
+}
+
+.navbar-button.dark{
+    background-color: inherit;
+    color: white;
+
+    border-radius: 5px;
+    border-style:solid;
+    border-width: 1px;
+    border-color: black;
+    margin: 0px;
+    padding: 0px;    
+}
+
+.navbar-button:hover.dark{
+    background-color: darkviolet;
+}
+
+.navbar-link-text.dark{
+    text-align: center;
+    margin: 5px 10px;
+    padding: 0px;
+}

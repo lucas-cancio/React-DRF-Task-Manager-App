@@ -15,12 +15,12 @@ export function CSRFTokenProvider({children}) {
             </SetCSRFTokenContext.Provider>
         </CSRFTokenContext.Provider>
     )
-}
+};
 
 export function useCSRFToken() {
     return useContext(CSRFTokenContext);
-}
+};
 
 export function useCSRFTokenSetter() {
     return useContext(SetCSRFTokenContext);
-}
+};

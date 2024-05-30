@@ -8,3 +8,42 @@ input[type='checkbox'].big-checkbox {
 input[type='checkbox'].big-checkbox:checked {
     background: #abd;
 }
+
+.taskHeaderCollapseBtn {
+    background-color: inherit;
+    border-style: inherit;
+}
+
+.task-collapsible-section.light {
+    border-top-style: solid;
+    background-color: #dbccb2;
+}
+
+.task-collapsible-section.dark {
+    border-top-style: solid;
+    background-color: #2e2733;
+}
+
+.task-btn.light {
+    background-color: white;
+}
+
+.task-btn.light:hover {
+    background-color: green;
+}
+
+.task-btn.dark {
+    background-color: grey;
+}
+
+.task-btn.dark:hover {
+    background-color: blue;
+}
+
+.task-input.light {
+    background-color: white;
+}
+
+.task-input.dark {
+    background-color: lightgray;
+}
