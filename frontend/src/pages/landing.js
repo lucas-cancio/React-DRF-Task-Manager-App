@@ -10,13 +10,19 @@ const LandingPage = () => {
 
     return (
         <Layout>
-            <h1>Landing Page</h1>
+            <div className="container-fluid">
+                <div className="d-flex flex-row justify-content-center" style={{height: 100 + "vh"}}>
+                    <div className="d-flex flex-column justify-content-center">
+                        <h1>Landing Page</h1>
 
-            { isLoggedIn ? (
-                <p>Go to your <Link to="/dashboard/">Dashboard</Link> to view your tasks!</p>
-            ) : (
-                <p>Login <Link to="/login/">HERE</Link> to create and view your tasks!</p>
-            )}
+                        { isLoggedIn ? (
+                            <p>Go to your <Link to="/dashboard/">Dashboard</Link> to view your tasks!</p>
+                        ) : (
+                            <p>Login <Link to="/login/">HERE</Link> to create and view your tasks!</p>
+                        )}
+                    </div>
+                </div>
+            </div>
         </Layout>
     )
 }
