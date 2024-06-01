@@ -1,9 +1,9 @@
 
 import { createContext, useContext,  useState, useEffect } from "react";
 
-const CSRFTokenContext = createContext(null);
+export const CSRFTokenContext = createContext(null);
 
-const SetCSRFTokenContext = createContext(null);
+export const SetCSRFTokenContext = createContext(null);
 
 export function CSRFTokenProvider({children}) {
     const [csrfToken, setCSRFToken] = useState(null);

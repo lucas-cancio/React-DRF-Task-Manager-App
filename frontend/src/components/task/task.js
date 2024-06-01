@@ -127,7 +127,7 @@ export default function Task({task}) {
 
     const renderSubtasks = () => {
         return task.subtasks.map((subtask) => (
-                <li key={subtask.id} style={{width: 100 + "%", listStyle: 'none'}}>
+                <li className="mb-1" key={subtask.id} style={{width: 100 + "%", listStyle: 'none'}}>
                     <Subtask 
                         subtask={subtask} 
                         updateEditedSubtaskList={updateEditedSubtaskList}
@@ -143,7 +143,12 @@ export default function Task({task}) {
 
                         <div className="d-flex flex-column col-12">
                             
-                            <button className="taskHeaderCollapseBtn px-4 py-2" data-bs-toggle="collapse" data-bs-target={`#task-${task.id}-collapsible`} type="button">
+                            <button 
+                                className="taskHeaderCollapseBtn px-4 py-2"
+                                type="button" 
+                                data-bs-toggle={!inEditMode ? "collapse" : undefined}
+                                data-bs-target={!inEditMode ? `#task-${task.id}-collapsible` : undefined}>
+                                    
                                 <div className="d-flex flex-row justify-content-between">
                                     <div className="d-flex flex-column">
                                         <div className="d-flex flex-row align-items-center">

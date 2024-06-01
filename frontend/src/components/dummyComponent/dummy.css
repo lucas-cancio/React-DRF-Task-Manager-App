@@ -1,0 +1,7 @@
+.dummyButton.on {
+    background-color: green;
+}
+
+.dummyButton.off {
+    background-color: red;
+}

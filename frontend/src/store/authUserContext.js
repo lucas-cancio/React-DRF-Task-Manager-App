@@ -3,9 +3,9 @@
 import api from "../services/axios";
 import { createContext, useReducer, useContext, useState, useEffect } from "react";
 
-const AuthUserContext = createContext(null);
+export const AuthUserContext = createContext(null);
 
-const AuthUserDispatchContext = createContext(null)
+export const AuthUserDispatchContext = createContext(null)
 
 export function AuthUserProvider({children}) {
     const [user, dispatch] = useReducer(authUserReducer, null);

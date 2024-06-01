@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "lib": ["es2017", "dom"],
+      "allowJs": true,
+      "checkJs": false,
+      "jsx": "react"
+    },
+    "include": ["src/**/*", "tests/**/*"],
+    "exclude": ["node_modules"]
+}
+  

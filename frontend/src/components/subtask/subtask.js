@@ -73,14 +73,16 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
         {
             !inEditMode ? (
                 <>
-                    <div className="subtaskContainer d-flex flex-row justify-content-between" style={{width: 100 + "%"}}>
-                            <div className="d-flex flex-column">
+                    <div className="subtaskContainer d-flex flex-row justify-content-between mb-2" style={{width: 100 + "%"}}>
+                            <div className="d-flex flex-column justify-content-center">
                                 <div className="d-flex flex-row">
                                     <input className={`subtask-input ${theme} mx-2`} type="checkbox" checked={subtask.completed} onChange={handleCompletedChange}></input>
-                                    <h5 className="subtaskTitle">{subtask.title}</h5>
+                                    <h5 className="subtaskTitle m-0">{subtask.title}</h5>
                                 </div>
                             </div>
-                            <p className="subtask1Deadline">{subtask.deadline}</p>
+                            <div className="d-flex flex-column justify-content-center">
+                                <p className="subtask1Deadline m-0">{subtask.deadline}</p>
+                            </div>
                     </div>
                     <div className="subtaskDescriptionContainer d-flex flex-row ms-5">
                         <div className="d-flex flex-columm col-12">
@@ -92,7 +94,7 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
             ) : (
                 <>
                     <div className="my-3" >
-                        <div className="subtaskContainer d-flex flex-row justify-content-between" style={{width: 100 + "%"}}>
+                        <div className="subtaskContainer d-flex flex-row justify-content-between mb-2" style={{width: 100 + "%"}}>
                                 <div className="d-flex flex-column">
                                     <div className="d-flex flex-row">
                                         <label htmlFor={`subtask-#${subtask.id}-title`}>Subtask Title</label>

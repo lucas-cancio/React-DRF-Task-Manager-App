@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useRef, useEffect } from "react";
 export const ThemeContext = createContext(null);
 export const SetThemeContext = createContext(null);
 
-export function ThemeProvider({children}) {
+export function ThemeProvider( {children}) {    
     const themeRef = useRef('dark');
     const [, setDummyState] = useState(0); // Dummy state to force re-renders
 

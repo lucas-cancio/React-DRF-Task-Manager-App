@@ -12,7 +12,7 @@ const LandingPage = () => {
         <Layout>
             <div className="container-fluid">
                 <div className="d-flex flex-row justify-content-center" style={{height: 100 + "vh"}}>
-                    <div className="d-flex flex-column justify-content-center">
+                    <div className="d-flex flex-column justify-content-center align-items-center">
                         <h1>Landing Page</h1>
 
                         { isLoggedIn ? (
