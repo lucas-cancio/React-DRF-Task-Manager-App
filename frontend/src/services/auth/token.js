@@ -3,6 +3,8 @@ import api from '../axios';
 export const getJWToken = ({username, password}) => {
     return new Promise((resolve, reject) => {
 
+        console.log("GETTING YOU YOUR JWT TOKEN");
+        
         api.post('/api/token/', { username, password }, {
             'headers': {
                 'Require-Auth': false,
