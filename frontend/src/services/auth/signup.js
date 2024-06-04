@@ -1,6 +1,6 @@
 import api from "../axios";
 
-export default function SignUp({firstName, lastName, email, username, password, csrfToken}) {
+export function SignUp({firstName, lastName, email, username, password, csrfToken}) {
     
     return new Promise((resolve, reject) => {
         api.post("/api/signup/", 
@@ -25,5 +25,5 @@ export default function SignUp({firstName, lastName, email, username, password, 
             console.error("Failed to create an account." + err);
             reject(err);
         });
-    })
-}
+    });
+};

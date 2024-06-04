@@ -12,7 +12,6 @@ import { getJWToken } from "../services/auth/token";
 import LoginForm from "../components/loginForm/loginForm";
 
 
-
 const LoginPage = () => {
 
     return (
@@ -26,7 +25,7 @@ const LoginPage = () => {
                 </div>
             </div>
         </Layout>
-    )
-}
+    );
+};
 
 export default LoginPage;

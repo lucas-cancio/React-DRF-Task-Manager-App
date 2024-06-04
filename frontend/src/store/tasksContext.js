@@ -24,7 +24,7 @@ export function useTasksDispatch() {
 }
 
 
-function tasksReducer(tasks, action) {
+export function tasksReducer(tasks, action) {
 
     switch(action.type) {
         case 'resetTasks': {
