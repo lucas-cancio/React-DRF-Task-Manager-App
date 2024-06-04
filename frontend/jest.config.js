@@ -9,5 +9,8 @@ module.exports = {
       '^.+\\.jsx?$': 'babel-jest'
     },
     testEnvironment: "jsdom",
-};
+  };
   
+  // transformIgnorePatterns: [
+  //   'node_modules/(?!(@react)/)',
+  // ],

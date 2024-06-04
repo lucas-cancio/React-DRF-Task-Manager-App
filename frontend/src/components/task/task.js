@@ -7,7 +7,7 @@ import Subtask from "../subtask/subtask";
 import { useTasksDispatch } from "../../store/tasksContext";
 import { useCSRFToken, useCSRFTokenSetter } from "../../store/csrfContext";
 import { GetCSRFToken } from "../../services/getCSRFToken";
-import { editTask, deleteTask, editSubtask, createSubtask, deleteSubtask } from "../../services/tasks";
+import { editTask, deleteTask, editSubtask, createSubtask } from "../../services/tasks";
 import { useTheme } from "../../store/themeContext";
 
 
@@ -146,6 +146,7 @@ export default function Task({task}) {
                             <button 
                                 className="taskHeaderCollapseBtn px-4 py-2"
                                 type="button" 
+                                data-testid="taskHeaderCollapseBtn"
                                 data-bs-toggle={!inEditMode ? "collapse" : undefined}
                                 data-bs-target={!inEditMode ? `#task-${task.id}-collapsible` : undefined}>
                                     
@@ -154,12 +155,12 @@ export default function Task({task}) {
                                         <div className="d-flex flex-row align-items-center">
                                             {inEditMode ? (
                                                 <>
-                                                    <label>Task Title</label>
-                                                    <input className={`task-input ${theme}`} form={`task-#${task.id}-form`} value={task.title} onChange={handleChangeTitle}></input>
+                                                    <label htmlFor={`task-#${task.id}-title-input`}>Task Title</label>
+                                                    <input className={`task-input ${theme}`} id={`task-#${task.id}-title-input`} form={`task-#${task.id}-form`} value={task.title} onChange={handleChangeTitle}></input>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <input className="big-checkbox mx-2" type="checkbox" checked={task.completed} onChange={handleChangeCompleted}></input>
+                                                    <input className="big-checkbox mx-2" type="checkbox" checked={task.completed} onChange={handleChangeCompleted} title="completedCheckbox"></input>
                                                     <h2 className="taskTitle">{task.title}</h2>
                                                 </>
                                             )}
@@ -170,8 +171,15 @@ export default function Task({task}) {
                                             <p className="taskDeadline">
                                                 {inEditMode ? (
                                                     <>
-                                                        <label>Deadline</label>
-                                                        <input className={`task-input ${theme}`} form={`task-#${task.id}-form`} type="date" value={task.deadline} onChange={handleChangeDeadline}></input>
+                                                        <label htmlFor={`task-#${task.id}-deadline-input`} >Deadline</label>
+                                                        <input 
+                                                            className={`task-input ${theme}`} 
+                                                            id={`task-#${task.id}-deadline-input`} 
+                                                            form={`task-#${task.id}-form`} 
+                                                            type="date" 
+                                                            value={task.deadline} 
+                                                            onChange={handleChangeDeadline}
+                                                            aria-label="Deadline"></input>
                                                     </>
                                                 ): (
                                                     <strong>
@@ -184,14 +192,14 @@ export default function Task({task}) {
                                 </div>
                             </button>
 
-                            <div className={`task-collapsible-section ${theme} collapse py-3 px-4`} id={`task-${task.id}-collapsible`}>
+                            <div className={`task-collapsible-section ${theme} collapse py-3 px-4`} id={`task-${task.id}-collapsible`} data-testid="taskCollapsible">
 
                                 <div className="taskDescriptionContainer d-flex flex-row mt-3 ms-4">
                                     <div className="d-flex flex-columm col-12">
                                         {inEditMode ? (
                                             <>
-                                                <label>Task Description</label>
-                                                <input className={`task-input ${theme}`} form={`task-#${task.id}-form`} type="text" value={task.description} onChange={handleChangeDescription}></input>
+                                                <label htmlFor={`task-#${task.id}-description-input`}>Task Description</label>
+                                                <input className={`task-input ${theme}`} id={`task-#${task.id}-description-input`} form={`task-#${task.id}-form`} type="text" value={task.description} onChange={handleChangeDescription}></input>
                                             </>
                                         ) : (
                                             <>

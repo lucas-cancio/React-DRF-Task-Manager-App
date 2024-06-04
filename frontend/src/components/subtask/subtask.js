@@ -76,8 +76,14 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                     <div className="subtaskContainer d-flex flex-row justify-content-between mb-2" style={{width: 100 + "%"}}>
                             <div className="d-flex flex-column justify-content-center">
                                 <div className="d-flex flex-row">
-                                    <input className={`subtask-input ${theme} mx-2`} type="checkbox" checked={subtask.completed} onChange={handleCompletedChange}></input>
-                                    <h5 className="subtaskTitle m-0">{subtask.title}</h5>
+                                    <input 
+                                        className={`subtask-input ${theme} mx-2`} 
+                                        type="checkbox" 
+                                        checked={subtask.completed} 
+                                        onChange={handleCompletedChange}
+                                        title="subtask checkbox"
+                                        data-testid={`subtask-${subtask.id}-completed-checkbox`}></input>
+                                    <h5 className="subtaskTitle m-0" title="subtask title">{subtask.title}</h5>
                                 </div>
                             </div>
                             <div className="d-flex flex-column justify-content-center">
@@ -102,7 +108,7 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                                     </div>
                                 </div>
                                 <div>
-                                    <label>Deadline</label>
+                                    <label htmlFor={`subtask-#${subtask.id}-deadline`}>Deadline</label>
                                     <input className={`subtask-input ${theme}`} id={`subtask-#${subtask.id}-deadline`} type="date" value={subtask.deadline} onChange={handleDeadlineChange}></input>
                                 </div>
                                 <div className="">
@@ -116,7 +122,7 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                         </div>
                         <div className="subtaskDescriptionContainer d-flex flex-row justify-content-between ms-5">
                             <div className="d-flex flex-columm">
-                                <label htmlFor={`subtask-#${subtask.id}-title`}>Description</label>
+                                <label htmlFor={`subtask-#${subtask.id}-description`}>Description</label>
                                 <input className={`subtask-input ${theme}`} id={`subtask-#${subtask.id}-description`} type="text" value={subtask.description} onChange={handleDescriptionChange}></input>
                             </div>
                         </div>
