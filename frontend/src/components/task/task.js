@@ -21,43 +21,15 @@ export default function Task({task}) {
 
     const theme = useTheme();
 
-    const handleChangeTitle = (event) => {
-        event.preventDefault();
-        const editedTask = { ...task, title: event.target.value };
+    const handleChange = (event) => {
+        let { name, value } = event.target;
+        if (event.target.type === "checkbox"){
+            value = event.target.checked;
+        }
         tasksDispatch({
-            'type': 'editTask',
-            'task': editedTask,
+            type: 'editTask',
+            task: { ...task, [name]: value },
         });
-    };
-
-    const handleChangeDeadline = (event) => {
-        event.preventDefault();
-        const editedTask = { ...task, deadline: event.target.value };
-        tasksDispatch({
-            'type': 'editTask',
-            'task': editedTask,
-        });
-    };
-
-    const handleChangeDescription = (event) => {
-        event.preventDefault();
-        const editedTask = { ...task, description: event.target.value };
-        tasksDispatch({
-            'type': 'editTask',
-            'task': editedTask,
-        });
-    };
-
-    const handleChangeCompleted = (event) => {
-        const editedTask = { ...task, completed: event.target.checked };
-        editTask(editedTask, csrfToken)
-        .then((res) => {
-            tasksDispatch({
-                'type': 'editTask',
-                'task': editedTask,
-            });
-        })
-        .catch((err) => console.error(err));
     };
 
     const handleDeleteTask = (event) => {
@@ -156,11 +128,23 @@ export default function Task({task}) {
                                             {inEditMode ? (
                                                 <>
                                                     <label htmlFor={`task-#${task.id}-title-input`}>Task Title</label>
-                                                    <input className={`task-input ${theme}`} id={`task-#${task.id}-title-input`} form={`task-#${task.id}-form`} value={task.title} onChange={handleChangeTitle}></input>
+                                                    <input className={`task-input ${theme}`} 
+                                                            id={`task-#${task.id}-title-input`} 
+                                                            form={`task-#${task.id}-form`} 
+                                                            value={task.title}
+                                                            onChange={handleChange}
+                                                            name="title"
+                                                    ></input>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <input className="big-checkbox mx-2" type="checkbox" checked={task.completed} onChange={handleChangeCompleted} title="completedCheckbox"></input>
+                                                    <input className="big-checkbox mx-2" 
+                                                            type="checkbox" 
+                                                            checked={task.completed} 
+                                                            onChange={handleChange} 
+                                                            title="completedCheckbox"
+                                                            name="completed"
+                                                            ></input>
                                                     <h2 className="taskTitle">{task.title}</h2>
                                                 </>
                                             )}
@@ -178,7 +162,8 @@ export default function Task({task}) {
                                                             form={`task-#${task.id}-form`} 
                                                             type="date" 
                                                             value={task.deadline} 
-                                                            onChange={handleChangeDeadline}
+                                                            onChange={handleChange}
+                                                            name="deadline"
                                                             aria-label="Deadline"></input>
                                                     </>
                                                 ): (
@@ -199,7 +184,14 @@ export default function Task({task}) {
                                         {inEditMode ? (
                                             <>
                                                 <label htmlFor={`task-#${task.id}-description-input`}>Task Description</label>
-                                                <input className={`task-input ${theme}`} id={`task-#${task.id}-description-input`} form={`task-#${task.id}-form`} type="text" value={task.description} onChange={handleChangeDescription}></input>
+                                                <input className={`task-input ${theme}`} 
+                                                        id={`task-#${task.id}-description-input`} 
+                                                        form={`task-#${task.id}-form`} 
+                                                        type="text" 
+                                                        value={task.description} 
+                                                        onChange={handleChange}
+                                                        name="description"
+                                                        ></input>
                                             </>
                                         ) : (
                                             <>
