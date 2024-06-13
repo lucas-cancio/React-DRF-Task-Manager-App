@@ -14,44 +14,27 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
 
     const theme = useTheme();
 
-    const handleTitleChange = (event) => {
+    const handleChange = (event) => {
         event.preventDefault();
-        let editedSubtask = {...subtask, title: event.target.value};
-        tasksDispatch({
-            'type': 'editSubtask',
-            'subtask': editedSubtask,
-        });
-        updateEditedSubtaskList(subtask.id);
-    };
 
-    const handleCompletedChange = (event) => {
-        let editedSubtask = {...subtask, completed: event.target.checked};
-        editSubtask(editedSubtask, csrfToken)
-        .then((res) => {
-            tasksDispatch({
-                'type': 'editSubtask',
-                'subtask': res,
-            });
-        })
-        .catch((err) => console.log(err));
-    };
-
-    const handleDeadlineChange = (event) => {
-        event.preventDefault();
-        let editedSubtask = {...subtask, deadline: event.target.value};
+        let { name, value } = event.target;
+        if (event.target.type === "checkbox"){
+            editSubtask(
+                { ...subtask, completed: event.target.checked},
+                csrfToken
+            )
+            .then((res) => {
+                tasksDispatch({
+                    type: "editSubtask",
+                    'subtask': res,
+                });
+            })
+            .catch((err) => console.log(err));
+            return;
+        }
         tasksDispatch({
-            'type': 'editSubtask',
-            'subtask': editedSubtask,
-        });
-        updateEditedSubtaskList(subtask.id);
-    };
-
-    const handleDescriptionChange = (event) => {
-        event.preventDefault();
-        let editedSubtask = {...subtask, description: event.target.value};
-        tasksDispatch({
-            'type': 'editSubtask',
-            'subtask': editedSubtask,
+            type: "editSubtask",
+            'subtask': { ...subtask, [name]: value},
         });
         updateEditedSubtaskList(subtask.id);
     };
@@ -80,9 +63,11 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                                         className={`subtask-input ${theme} mx-2`} 
                                         type="checkbox" 
                                         checked={subtask.completed} 
-                                        onChange={handleCompletedChange}
+                                        onChange={handleChange}
                                         title="subtask checkbox"
-                                        data-testid={`subtask-${subtask.id}-completed-checkbox`}></input>
+                                        data-testid={`subtask-${subtask.id}-completed-checkbox`}
+                                        name="completed">    
+                                    </input>
                                     <h5 className="subtaskTitle m-0" title="subtask title">{subtask.title}</h5>
                                 </div>
                             </div>
@@ -104,12 +89,22 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                                 <div className="d-flex flex-column">
                                     <div className="d-flex flex-row">
                                         <label htmlFor={`subtask-#${subtask.id}-title`}>Subtask Title</label>
-                                        <input className={`subtask-input ${theme}`} id={`subtask-#${subtask.id}-title`} type="text" value={subtask.title} onChange={handleTitleChange}></input>
+                                        <input className={`subtask-input ${theme}`} 
+                                            id={`subtask-#${subtask.id}-title`} 
+                                            type="text" value={subtask.title} 
+                                            onChange={handleChange}
+                                            name="title">        
+                                        </input>
                                     </div>
                                 </div>
                                 <div>
                                     <label htmlFor={`subtask-#${subtask.id}-deadline`}>Deadline</label>
-                                    <input className={`subtask-input ${theme}`} id={`subtask-#${subtask.id}-deadline`} type="date" value={subtask.deadline} onChange={handleDeadlineChange}></input>
+                                    <input className={`subtask-input ${theme}`} 
+                                        id={`subtask-#${subtask.id}-deadline`} 
+                                        type="date" value={subtask.deadline} 
+                                        onChange={handleChange}
+                                        name="deadline">
+                                    </input>
                                 </div>
                                 <div className="">
                                     <button className={`subtask-input ${theme}`} title="Delete subtask" onClick={handleDeleteSubtask}>
@@ -123,7 +118,12 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                         <div className="subtaskDescriptionContainer d-flex flex-row justify-content-between ms-5">
                             <div className="d-flex flex-columm">
                                 <label htmlFor={`subtask-#${subtask.id}-description`}>Description</label>
-                                <input className={`subtask-input ${theme}`} id={`subtask-#${subtask.id}-description`} type="text" value={subtask.description} onChange={handleDescriptionChange}></input>
+                                <input className={`subtask-input ${theme}`} 
+                                    id={`subtask-#${subtask.id}-description`} 
+                                    type="text" value={subtask.description} 
+                                    onChange={handleChange}
+                                    name="description">
+                                </input>
                             </div>
                         </div>
                     </div>

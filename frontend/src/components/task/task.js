@@ -16,48 +16,33 @@ export default function Task({task}) {
     const tasksDispatch = useTasksDispatch();
     const csrfToken = useCSRFToken();
 
+    const [localTask, setLocalTask] = useState(task);
     const [subtasksEdited, setSubtasksEdited] = useState([]);
     const [inEditMode, setInEditMode] = useState(false);
 
     const theme = useTheme();
 
-    const handleChangeTitle = (event) => {
-        event.preventDefault();
-        const editedTask = { ...task, title: event.target.value };
-        tasksDispatch({
-            'type': 'editTask',
-            'task': editedTask,
-        });
-    };
+    useEffect(() => {
+        setLocalTask(task);
+    }, [task]);
 
-    const handleChangeDeadline = (event) => {
+    const handleChange = (event) => {
         event.preventDefault();
-        const editedTask = { ...task, deadline: event.target.value };
-        tasksDispatch({
-            'type': 'editTask',
-            'task': editedTask,
-        });
-    };
 
-    const handleChangeDescription = (event) => {
-        event.preventDefault();
-        const editedTask = { ...task, description: event.target.value };
-        tasksDispatch({
-            'type': 'editTask',
-            'task': editedTask,
+        let { name, value } = event.target;
+        if (event.target.type === "checkbox"){
+            value = event.target.checked;
+        }
+        
+        setLocalTask({
+            ...localTask,
+            [name]: value,
         });
-    };
-
-    const handleChangeCompleted = (event) => {
-        const editedTask = { ...task, completed: event.target.checked };
-        editTask(editedTask, csrfToken)
-        .then((res) => {
-            tasksDispatch({
-                'type': 'editTask',
-                'task': editedTask,
-            });
-        })
-        .catch((err) => console.error(err));
+        
+        tasksDispatch({
+            type: 'editTask',
+            task: { ...task, [name]: value },
+        });
     };
 
     const handleDeleteTask = (event) => {
@@ -156,11 +141,23 @@ export default function Task({task}) {
                                             {inEditMode ? (
                                                 <>
                                                     <label htmlFor={`task-#${task.id}-title-input`}>Task Title</label>
-                                                    <input className={`task-input ${theme}`} id={`task-#${task.id}-title-input`} form={`task-#${task.id}-form`} value={task.title} onChange={handleChangeTitle}></input>
+                                                    <input className={`task-input ${theme}`} 
+                                                        id={`task-#${task.id}-title-input`} 
+                                                        form={`task-#${task.id}-form`} 
+                                                        value={task.title}
+                                                        onChange={handleChange}
+                                                        name="title"
+                                                    ></input>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <input className="big-checkbox mx-2" type="checkbox" checked={task.completed} onChange={handleChangeCompleted} title="completedCheckbox"></input>
+                                                    <input className="big-checkbox mx-2" 
+                                                        type="checkbox" 
+                                                        checked={task.completed} 
+                                                        onChange={handleChange} 
+                                                        title="completedCheckbox"
+                                                        name="completed"
+                                                    ></input>
                                                     <h2 className="taskTitle">{task.title}</h2>
                                                 </>
                                             )}
@@ -178,8 +175,10 @@ export default function Task({task}) {
                                                             form={`task-#${task.id}-form`} 
                                                             type="date" 
                                                             value={task.deadline} 
-                                                            onChange={handleChangeDeadline}
-                                                            aria-label="Deadline"></input>
+                                                            onChange={handleChange}
+                                                            name="deadline"
+                                                            aria-label="Deadline">
+                                                        </input>
                                                     </>
                                                 ): (
                                                     <strong>
@@ -199,7 +198,14 @@ export default function Task({task}) {
                                         {inEditMode ? (
                                             <>
                                                 <label htmlFor={`task-#${task.id}-description-input`}>Task Description</label>
-                                                <input className={`task-input ${theme}`} id={`task-#${task.id}-description-input`} form={`task-#${task.id}-form`} type="text" value={task.description} onChange={handleChangeDescription}></input>
+                                                <input className={`task-input ${theme}`} 
+                                                    id={`task-#${task.id}-description-input`} 
+                                                    form={`task-#${task.id}-form`} 
+                                                    type="text" 
+                                                    value={task.description} 
+                                                    onChange={handleChange}
+                                                    name="description">
+                                                </input>
                                             </>
                                         ) : (
                                             <>
