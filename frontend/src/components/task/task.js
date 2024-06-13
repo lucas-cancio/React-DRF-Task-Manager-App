@@ -5,8 +5,7 @@ import Card from "../card/card";
 import Subtask from "../subtask/subtask";
 
 import { useTasksDispatch } from "../../store/tasksContext";
-import { useCSRFToken, useCSRFTokenSetter } from "../../store/csrfContext";
-import { GetCSRFToken } from "../../services/getCSRFToken";
+import { useCSRFToken } from "../../store/csrfContext";
 import { editTask, deleteTask, editSubtask, createSubtask } from "../../services/tasks";
 import { useTheme } from "../../store/themeContext";
 

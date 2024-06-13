@@ -26,7 +26,6 @@ export function AuthUserProvider({children}) {
                     firstName: res.data.user.firstName,
                     lastName: res.data.user.lastName,
                     email: res.data.user.email,
-                    // token: res.data.token,
                 });
             } else {
                 console.log("Couldn't get session.");
@@ -54,7 +53,7 @@ export function useAuthUserDispatch() {
     return useContext(AuthUserDispatchContext);
 }
 
-function authUserReducer(user, action) {
+export function authUserReducer(user, action) {
     switch(action.type) {
         case 'login': {
             return {
