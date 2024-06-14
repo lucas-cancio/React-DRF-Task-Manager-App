@@ -68,7 +68,13 @@ describe("Login form", () => {
     it("Calls handleLogin, requestLogin service, getJWToken service, and react-router navigate function when all are successful after form is submited", async () => {
         const mockCredentials = { username: 'testuser', password: 'password'};
 
-        requestLogin.mockImplementation(() => Promise.resolve());
+        requestLogin.mockImplementation(() => Promise.resolve({
+            id: 1,
+            username: "john",
+            firstName: "johnny",
+            lastName: "doe",
+            email: "johndoe@example.com",
+        }));
         getJWToken.mockImplementation(() => Promise.resolve());
         
         renderLoginForm();
@@ -144,8 +150,14 @@ describe("Login form", () => {
     it("Doesn't call react-router navigate function after requestLogin and getJWToken services respectively succeed and fail after the form is submited", async () => {
         const mockCredentials = { username: 'testuser', password: 'password'};
 
-        // Mock requestLogin to return a rejected Promise
-        requestLogin.mockImplementation(() => Promise.resolve());
+        // Mock requestLogin to return a successful Promise
+        requestLogin.mockImplementation(() => Promise.resolve({
+            id: 1,
+            username: "john",
+            firstName: "johnny",
+            lastName: "doe",
+            email: "johndoe@example.com",
+        }));
 
         // Mock getJWToken to return a resolved Promise (shouldn't be called)
         getJWToken.mockImplementation(() => Promise.reject(new Error("Failed to Get JWToken."))); 

@@ -23,7 +23,7 @@ export default function LoginForm() {
     useEffect(() => {
         GetCSRFToken({
             csrfToken: csrfToken,
-            csrfTokenSetter, csrfTokenSetter
+            csrfTokenSetter: csrfTokenSetter
         });
     }, []);
 
@@ -48,6 +48,15 @@ export default function LoginForm() {
         })
         .then((data) => {
             console.log("Login successful.");
+
+            authUserDispatch({
+                type: 'login',
+                id: data.id,
+                username: data.username,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+            });
 
             getJWToken({
                 username: username,

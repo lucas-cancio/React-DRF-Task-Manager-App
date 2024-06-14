@@ -62,7 +62,6 @@ export function authUserReducer(user, action) {
                 lastName: action.lastName,
                 username: action.username,
                 email: action.email,
-                // token: action.token,
             };
         }
         case 'getSession': {
@@ -72,7 +71,6 @@ export function authUserReducer(user, action) {
                 lastName: action.lastName,
                 username: action.username,
                 email: action.email,
-                // token: action.token,
             }
         }
         case 'logout': {

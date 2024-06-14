@@ -1,23 +1,23 @@
 import api from '../axios';
 
-export default function LogOut({authUserDispatch, csrfTokenSetter}) {
-    api.get("/api/logout/",
-        {
-            headers: {
-                "Require-Auth": false,
-            },
-            withCredentials: true,
-        }
-    )
-    .then((res) => {
-        console.log("Successfully logged out.");
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('refreshToken');
-        authUserDispatch({
-            type: "logout",
+export default function LogOut() {
+
+    return new Promise((resolve, reject) => {
+        api.get("/api/logout/",
+            {
+                headers: {
+                    "Require-Auth": false,
+                },
+                withCredentials: true,
+            }
+        )
+        .then((res) => {
+            console.log("Successfully logged out.");
+            resolve(res);
         })
-    })
-    .catch((err) => {
-        console.error("Failed to log out." + err);
-    })
+        .catch((err) => {
+            console.error("Failed to log out." + err);
+            reject(err);
+        })
+    });
 }

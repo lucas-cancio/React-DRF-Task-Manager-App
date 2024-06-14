@@ -122,7 +122,7 @@ const deleteSubtask = (subtaskID, csrfToken) => {
                 withCredentials: true,
             }
         )
-        .then((res) => resolve(console.log(res)))
+        .then((res) => resolve(res))
         .catch((err) => reject(err));
     });
 };

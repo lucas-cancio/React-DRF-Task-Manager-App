@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import NavBar from "./navbar";
 import { BrowserRouter } from "react-router-dom";
 import { SetThemeContext, ThemeContext } from "../../store/themeContext";
@@ -17,12 +17,12 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockNavigate,
 }));
 
-// do 
+// mock the authUserDispatch function
+const mockAuthUserDispatch = jest.fn();
 
 describe("Navbar", () => {
 
     const renderNavBar = ({ theme = 'light', user = null, setTheme=jest.fn() } = {}) => {
-        const authUserDispatch = jest.fn();
         const csrfTokenSetter = jest.fn();
 
         return render(
@@ -30,7 +30,7 @@ describe("Navbar", () => {
                 <ThemeContext.Provider value={theme}>
                     <SetThemeContext.Provider value={setTheme}>
                         <AuthUserContext.Provider value={user}>
-                            <AuthUserDispatchContext.Provider value={authUserDispatch}>
+                            <AuthUserDispatchContext.Provider value={mockAuthUserDispatch}>
                                 <SetCSRFTokenContext.Provider value={csrfTokenSetter}>
                                     <NavBar />
                                 </SetCSRFTokenContext.Provider>
@@ -110,17 +110,21 @@ describe("Navbar", () => {
         expect(signUpLink).toBeInTheDocument();
     });
     
-    it("Calls the logout function and navigates to landing page when logout button is clicked.", () => {
+    it("Calls the logout function and navigates to landing page when logout button is clicked.", async () => {
+        
+        LogOut.mockImplementationOnce(() => Promise.resolve("Successfully logged out"));
+        
         renderNavBar({user:{ name: "Test User"}});
         
         const logoutBtn = screen.getByRole('button', {name: "Log Out" });
         fireEvent.click(logoutBtn);
         
-        expect(LogOut).toHaveBeenCalledWith({
-            authUserDispatch: expect.any(Function),
-            csrfTokenSetter: expect.any(Function),
-        });
         
+        await waitFor(() => {
+            expect(LogOut).toHaveBeenCalled();
+        });
+
+        expect(mockAuthUserDispatch).toHaveBeenCalled();
         expect(mockNavigate).toHaveBeenCalledWith('/');
     });
 });

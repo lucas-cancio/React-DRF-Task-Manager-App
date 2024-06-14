@@ -24,12 +24,17 @@ export default function NavBar() {
     const handleLogout = (e) => {
         e.preventDefault();
 
-        LogOut({
-            authUserDispatch: authUserDispatch,
-            csrfTokenSetter: csrfTokenSetter,
-        });
-        navigate("/");
-    }
+        LogOut()
+        .then((res) => {
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('refreshToken');
+            authUserDispatch({
+                type: "logout",
+            });
+            navigate("/");
+        })
+        .catch((err) => console.log(err));
+    };
 
     const toggleTheme = (e) => {
         e.preventDefault();

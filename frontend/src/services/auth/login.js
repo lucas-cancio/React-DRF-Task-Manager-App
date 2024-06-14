@@ -1,7 +1,7 @@
 import api from '../axios';
 import isResponseOK from '../../utils/checkResponseStatus';
 
-export const requestLogin = ({username, password, csrfToken, authUserDispatch}) => {
+export const requestLogin = ({username, password, csrfToken}) => {
 
     return new Promise((resolve, reject) => {
 
@@ -19,14 +19,6 @@ export const requestLogin = ({username, password, csrfToken, authUserDispatch}) 
             .then((res) => isResponseOK(res))
             .then((loginData) => {
                 console.log(loginData);
-                authUserDispatch({
-                    type: 'login',
-                    id: loginData.id,
-                    username: loginData.username,
-                    firstName: loginData.firstName,
-                    lastName: loginData.lastName,
-                    email: loginData.email,
-                });
                 resolve(loginData);
             })
             .catch((error) => {
