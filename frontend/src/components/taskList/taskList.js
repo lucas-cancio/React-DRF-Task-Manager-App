@@ -71,7 +71,7 @@ export const TaskList = () => {
         <div className="d-flex flex-column col-md-12 col-lg-6 text-center">
             <h1 className="mt-5 my-3 pt-5">
                 <strong>
-                    Todo List
+                    Your Tasks
                 </strong>
             </h1>
             <div className="d-flex flex-row justify-content-center my-3">

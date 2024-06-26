@@ -1,0 +1,89 @@
+.icon.light {
+    color: orange;
+}
+
+.icon.dark {
+    color: darkviolet;
+}
+
+.coloredText.light {
+    color: orange;
+}
+
+.coloredText.dark {
+    color: darkviolet;
+}
+
+
+
+/* Small devices (tablets, 4009x and up) */
+@media (min-width: 0px) {
+    .sampleImage {
+        width: 180px;
+        height: 120px;
+        padding-bottom: 12px;
+    }
+    
+    .sampleImageBackground.light{
+        border-radius: 100%;
+        background-color: orange;
+        width: 240px;
+        height: 240px;
+    }
+    
+    .sampleImageBackground.dark{
+        border-radius: 50%;
+        background-color: darkviolet;
+        width: 240px;
+        height: 240px;
+        margin-bottom: 40px;
+    }
+}
+  
+  /* Medium devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    .sampleImage {
+        width: 180px;
+        height: 120px;
+        padding-bottom: 12px;
+    }
+    
+    .sampleImageBackground.light{
+        border-radius: 100%;
+        background-color: orange;
+        width: 240px;
+        height: 240px;
+    }
+    
+    .sampleImageBackground.dark{
+        border-radius: 50%;
+        background-color: darkviolet;
+        width: 240px;
+        height: 240px;
+        margin-bottom: 40px;
+    }
+}
+  
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+    .sampleImage {
+        width: 300px;
+        height: 200px;
+        padding-bottom: 20px;
+    }
+    
+    .sampleImageBackground.light{
+        border-radius: 100%;
+        background-color: orange;
+        width: 400px;
+        height: 400px;
+    }
+    
+    .sampleImageBackground.dark{
+        border-radius: 50%;
+        background-color: darkviolet;
+        width: 400px;
+        height: 400px;
+        margin-bottom: 40px;
+    }
+}
