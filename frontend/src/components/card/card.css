@@ -1,11 +1,13 @@
 .my-card.light {
-    background-color: orange;
+    /* background-color: orange; */
+    background: linear-gradient(to top, rgb(236, 95, 0), orange);
     border-radius: 20px;
     overflow: hidden;
 }
 
 .my-card.dark {
-    background-color: darkviolet;
+    /* background-color: darkviolet; */
+    background: linear-gradient(to top, rgb(98, 0, 211), darkviolet);
     border-radius: 20px;
     overflow: hidden;
 }

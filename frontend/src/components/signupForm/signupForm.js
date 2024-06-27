@@ -7,6 +7,9 @@ import { SignUp } from "../../services/auth/signup";
 import { GetCSRFToken } from "../../services/getCSRFToken";
 import Card from "../card/card";
 
+import "./signupForm.css";
+import { useTheme } from "../../store/themeContext";
+
 export default function SignUpForm() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -16,6 +19,8 @@ export default function SignUpForm() {
 
     const csrfToken = useCSRFToken();
     const csrfTokenSetter = useCSRFTokenSetter();
+
+    const theme = useTheme();
 
     const navigate = useNavigate();
 
@@ -67,65 +72,40 @@ export default function SignUpForm() {
 
 
     return (
-        <Card>
-            <div className="p-3">
+        <div className={`signupFormContainer ${theme} p-5`}>
+            <h2 className="mb-3 text-center">Sign Up</h2>
+            <p className="instructionMsg text-center mb-4">Please fill in the form to create an account.</p>
+            <hr/>
+            <form onSubmit={handleSubmit}>
+                <div className="d-flex flex-row justify-content-center mb-2">
+                    <input className="normalInput rounded-pill" id="firstNameInput" type="text" name="firstName" placeholder="first name" 
+                        value={firstName} onChange={handleFirstNameChange} required data-testid="firstNameInput"></input>
+                </div>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <div className="d-flex flex-column col-sm-6 col-md-4 align-items-center">
-                            <label htmlFor="firstNameInput">First Name</label>
-                        </div>
-                        <div className="d-flex flex-column col-sm-6 align-items-center">
-                            <input id="firstNameInput" type="text" name="firstName" placeholder="first name" 
-                                value={firstName} onChange={handleFirstNameChange} required></input>
-                        </div>
-                    </div>
+                <div className="d-flex flex-row justify-content-center mb-2">
+                    <input className="normalInput rounded-pill" id="lastNameInput" type="text" name="lastName" placeholder="last name" 
+                        value={lastName} onChange={handleLastNameChange} required data-testid="lastNameInput"></input>
+                </div>
+                
+                <div className="d-flex flex-row justify-content-center mb-2">
+                    <input className="normalInput rounded-pill" id="emailInput" type="email" name="email" placeholder="email"
+                        value={email} onChange={handleEmailChange} required data-testid="emailInput"></input>
+                </div>
 
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <div className="d-flex flex-column col-sm-6 col-md-4 align-items-center">
-                            <label htmlFor="lastNameInput">Last Name</label>
-                        </div>
-                        <div className="d-flex flex-column col-sm-6 align-items-center">
-                            <input id="lastNameInput" type="text" name="lastName" placeholder="last name" 
-                                value={lastName} onChange={handleLastNameChange} required></input>
-                        </div>    
-                    </div>
-                    
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <div className="d-flex flex-column col-sm-6 col-md-4 align-items-center">
-                            <label htmlFor="emailInput">Email</label>
-                        </div>
-                        <div className="d-flex flex-column col-sm-6 align-items-center">
-                            <input id="emailInput" type="email" name="email" placeholder="email"
-                                value={email} onChange={handleEmailChange} required></input>
-                        </div>
-                    </div>
+                <div className="d-flex flex-row justify-content-center mb-2">
+                    <input className="normalInput rounded-pill" id="usernameInput" type="text" name="username" placeholder="username"
+                        value={username} onChange={handleUserNameChange} required data-testid="usernameInput"></input>
+                </div>
 
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <div className="d-flex flex-column col-sm-6 col-md-4 align-items-center">
-                            <label htmlFor="usernameInput">Username</label>
-                        </div>
-                        <div className="d-flex flex-column col-sm-6 align-items-center">
-                            <input id="usernameInput" type="text" name="username" placeholder="username"
-                                value={username} onChange={handleUserNameChange} required></input>
-                        </div>        
-                    </div>
+                <div className="d-flex flex-row justify-content-center mb-3">
+                    <input className="normalInput rounded-pill" id="passwordInput" type="password" name="password" placeholder="password" 
+                        value={password} onChange={handlePasswordChange} required data-testid="passwordInput"></input>     
+                </div>
 
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <div className="d-flex flex-column col-sm-6 col-md-4 align-items-center">
-                            <label htmlFor="passwordInput">Password</label>
-                        </div>
-                        <div className="d-flex flex-column col-sm-6 align-items-center">
-                            <input id="passwordInput" type="password" name="password" placeholder="password" 
-                                value={password} onChange={handlePasswordChange} required></input>
-                        </div>        
-                    </div>
-
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <input type="submit" name="submit"></input>
-                    </div>
-                </form>
-            </div>
-        </Card>
+                <div className="d-flex flex-row justify-content-center">
+                    <input className={`signupSubmitInput rounded-pill ${theme}`} type="submit" name="submit"></input>
+                </div>
+            </form>
+        </div>
     );
 }

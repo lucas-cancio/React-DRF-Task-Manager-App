@@ -30,6 +30,7 @@ export default function Task({task}) {
 
         let { name, value } = event.target;
         if (event.target.type === "checkbox"){
+            event.stopPropagation();
             value = event.target.checked;
         }
         
@@ -157,7 +158,7 @@ export default function Task({task}) {
                                                         title="completedCheckbox"
                                                         name="completed"
                                                     ></input>
-                                                    <h2 className="taskTitle">{task.title}</h2>
+                                                    <h2 className={`taskTitle ${theme}`}>{task.title}</h2>
                                                 </>
                                             )}
                                         </div>

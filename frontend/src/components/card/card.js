@@ -7,7 +7,7 @@ const Card = ({children}) => {
     const theme = useTheme();
 
     return (
-        <div className={`my-card ${theme}`} data-testid="CardBody">
+        <div className={`my-card ${theme} rounded`} data-testid="CardBody">
             {children}
         </div>
     );

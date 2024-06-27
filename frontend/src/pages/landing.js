@@ -19,8 +19,8 @@ TaskMaster is here to help you stay on track and get things done.`;
             <div className="container-fluid pt-1 mt-5">
                 <div className="d-flex flex-row justify-content-center" >
                     <div className="d-flex flex-column justify-content-start align-items-center">
-                        <div className="d-flex flex-row justify-content-center align-items-center p-3 py-5 mt-5">
-                            <div className="d-flex flex-column justify-content-start align-items-center">
+                        <div className="d-flex flex-row justify-content-center align-items-center p-3 py-5 mt-5 flex-wrap">
+                            <div className="d-flex flex-column justify-content-start align-items-center col-sm-9 col-md-8 col-lg-6 pb-3">
                                 <div className="d-flex flex-row">
                                     <h1 className="m-1">Welcome to <strong className={`coloredText ${theme}`}>TaskMaster</strong></h1>
                                 </div>
@@ -28,11 +28,16 @@ TaskMaster is here to help you stay on track and get things done.`;
                                     <h5 className="m-1 text-wrap">Stay Organized, Stay Productive</h5>
                                 </div>
                                 <div className="d-flex flex-row justify-content-center">
-                                    <div className="d-flex flex-column justify-content-start align-items-center col-10 col-md-7">
+                                    <div className="d-flex flex-column justify-content-start align-items-center col-10 col-md-9">
                                         <p className="m-1 text-wrap text-center" style={{ whiteSpace: 'pre' }}>
                                             {mytext}
                                         </p>
                                     </div>
+                                </div>
+                            </div>
+                            <div className="d-flex flex-column justify-content-center align-items-center mx-2 col-sm-10 col-md-4 col-lg-4 m-3 mt-5">
+                                <div className={`d-flex flex-row sampleImageBackground ${theme} justify-content-center align-items-center`}>
+                                    <img className="sampleImage" src={`${process.env.PUBLIC_URL}/assets/images/SampleImg2.png`} alt="" />
                                 </div>
                             </div>
                         </div>
@@ -116,7 +121,12 @@ TaskMaster is here to help you stay on track and get things done.`;
                             </div>    
                         </div>
 
-                        <div className="d-flex flex-row flex-wrap-reverse justify-content-center align-items-center p-3 py-4 mt-4" style={{width: 100 + '%'}}>
+                        <div className="d-flex flex-row flex-wrap justify-content-center align-items-center p-3 py-4 mt-4" style={{width: 100 + '%'}}>
+                            <div className="d-flex flex-column justify-content-center align-items-center mx-4">
+                                <div className={`d-flex flex-row sampleImageBackground ${theme} justify-content-center align-items-center`}>
+                                    <img className="sampleImage" src={`${process.env.PUBLIC_URL}/assets/images/SampleImg.png`} alt="" />
+                                </div>
+                            </div>
                             <div className="d-flex flex-column justify-content-start align-items-start mx-3">
                                 <div className="d-flex flex-row align-self-center mb-3">
                                     <h2>Why Choose TaskMaster</h2>
@@ -152,11 +162,6 @@ TaskMaster is here to help you stay on track and get things done.`;
                                             Flexible pricing to suit your needs, whether you're an individual or a large team.
                                         </p>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="d-flex flex-column justify-content-center align-items-center mx-4">
-                                <div className={`d-flex flex-row sampleImageBackground ${theme} justify-content-center align-items-center`}>
-                                    <img className="sampleImage" src={`${process.env.PUBLIC_URL}/assets/images/SampleImg.png`} alt="" />
                                 </div>
                             </div>
                         </div>

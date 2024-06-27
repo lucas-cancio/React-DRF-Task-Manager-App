@@ -41,11 +41,11 @@ describe("Signup Form Component", () => {
     it("Correctly renders sign up form", () => {
         renderSignupForm();
 
-        expect(screen.getByLabelText("First Name")).toBeInTheDocument();
-        expect(screen.getByLabelText("Last Name")).toBeInTheDocument();
-        expect(screen.getByLabelText("Email")).toBeInTheDocument();
-        expect(screen.getByLabelText("Username")).toBeInTheDocument();
-        expect(screen.getByLabelText("Password")).toBeInTheDocument();
+        expect(screen.getByTestId("firstNameInput")).toBeInTheDocument();
+        expect(screen.getByTestId("lastNameInput")).toBeInTheDocument();
+        expect(screen.getByTestId("emailInput")).toBeInTheDocument();
+        expect(screen.getByTestId("usernameInput")).toBeInTheDocument();
+        expect(screen.getByTestId("passwordInput")).toBeInTheDocument();
         expect(screen.getByRole("button", {name: "Submit"})).toBeInTheDocument();
     });
 
@@ -55,11 +55,11 @@ describe("Signup Form Component", () => {
         
         renderSignupForm();
 
-        const firstNameInput = screen.getByLabelText("First Name");
-        const lastNameInput = screen.getByLabelText("Last Name");
-        const emailInput = screen.getByLabelText("Email");
-        const usernameInput = screen.getByLabelText("Username");
-        const passwordInput = screen.getByLabelText("Password");
+        const firstNameInput = screen.getByTestId("firstNameInput");
+        const lastNameInput = screen.getByTestId("lastNameInput");
+        const emailInput = screen.getByTestId("emailInput");
+        const usernameInput = screen.getByTestId("usernameInput");
+        const passwordInput = screen.getByTestId("passwordInput");
 
         const fakeChanges = {
             firstName: "John",

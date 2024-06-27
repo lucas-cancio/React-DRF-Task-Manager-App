@@ -6,12 +6,17 @@ import { useCSRFToken, useCSRFTokenSetter } from "../../store/csrfContext";
 import { GetCSRFToken } from "../../services/getCSRFToken";
 
 import { useEffect } from "react";
+import "./taskList.css";
+import { useTheme } from "../../store/themeContext";
+
 
 export const TaskList = () => {
     const tasks = useTasks() || [];
     const tasksDispatch = useTasksDispatch();
     const csrfToken = useCSRFToken();
     const csrfTokenSetter = useCSRFTokenSetter();
+
+    const theme = useTheme();
 
     // Get CSRF token
     useEffect(() => {
@@ -76,7 +81,7 @@ export const TaskList = () => {
             </h1>
             <div className="d-flex flex-row justify-content-center my-3">
                 <div className="d-flex flex-column col-3">
-                    <button title="Create new task" onClick={handleCreateNewTask} >Create New Task</button>
+                    <button className={`createTaskBtn ${theme} rounded-pill`} title="Create new task" onClick={handleCreateNewTask} >Create New Task</button>
                 </div>
             </div>
             {renderTasks()}

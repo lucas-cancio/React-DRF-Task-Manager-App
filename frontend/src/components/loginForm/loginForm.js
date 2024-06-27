@@ -9,8 +9,11 @@ import { getJWToken } from "../../services/auth/token";
 
 import Card from "../card/card";
 import "./loginForm.css";
+import { useTheme } from "../../store/themeContext";
 
 export default function LoginForm() {
+
+    const theme = useTheme();
 
     const csrfToken = useCSRFToken();
     const csrfTokenSetter = useCSRFTokenSetter();
@@ -77,33 +80,37 @@ export default function LoginForm() {
     }
 
     return (
-        <Card>
-            <div className="p-3">
-                <form onSubmit={handleLogin}>
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <div className="d-flex flex-column col-sm-6 col-md-4 align-items-center">
-                            <label className="mx-2" htmlFor="usernameInput">Username</label>
-                        </div>
-                        <div className="d-flex flex-column col-sm-6 align-items-center">
-                            <input id="usernameInput" type="text" name="username" placeholder="username" value={username} onChange={handleUsernameChange}></input>
-                        </div>
+        <div className={`loginFormContainer ${theme} my-5`}>
+            <div className="d-flex flex-row justify-content-center flex-wrap">
+                <div className={`d-flex flex-column loginFormLeftContainer col-8 col-md-4 ${theme}`}>
+                    <div className="p-5">
+                        <h4 className="py-3">Sign In</h4>
+                        <form onSubmit={handleLogin}>
+                            <div className="d-flex flex-row justify-content-center mb-3">
+                                <div className="d-flex flex-column col-12 align-items-start">
+                                    <label className="mb-2" htmlFor="usernameInput"><strong>Username</strong></label>
+                                    <input className="normalLoginInput rounded-pill" id="usernameInput" type="text" name="username" placeholder="Username" value={username} onChange={handleUsernameChange}></input>
+                                </div>
+                            </div>
+                            <div className="d-flex flex-row justify-content-center mb-4">
+                                <div className="d-flex flex-column col-12 align-items-start">
+                                    <label className="mb-2" htmlFor="passwordInput"><strong>Password</strong></label>
+                                    <input className="normalLoginInput rounded-pill" id="passwordInput" type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange}></input>
+                                </div>
+                            </div>
+                            <div className="d-flex flex-row justify-content-center mb-3">
+                                <input className={`loginSubmitInput rounded-pill ${theme}`} type="submit" name="submit" value="Log In"></input>
+                            </div>
+                        </form>
                     </div>
-                    <div className="d-flex flex-row justify-content-center mb-2">
-                        <div className="d-flex flex-column col-sm-6 col-md-4 align-items-center">
-                            <label className="mx-2" htmlFor="passwordInput">Password</label>
-                        </div>
-                        <div className="d-flex flex-column col-sm-6 align-items-center">
-                            <input id="passwordInput" type="password" name="password" placeholder="password" value={password} onChange={handlePasswordChange}></input>
-                        </div>
-                    </div>
-                    <div className="d-flex flex-row justify-content-center mb-1">
-                        <input type="submit" name="submit"></input>
-                    </div>
-                </form>
-                <div className="d-flex flex-row justify-content-center">
-                    <p>Don't have an account? <Link to="/signup/">Register Here</Link></p>
+                </div>
+
+                <div className={`d-flex flex-column loginFormRightContainer col-8 col-md-4 ${theme} justify-content-center align-items-center`}>
+                    <h3 className="mt-5"> <strong>Welcome to Login</strong></h3>
+                    <p>Don't have an account?</p>
+                    <Link className={`signupLink rounded-pill ${theme} mb-5`} to="/signup/">Sign Up</Link>
                 </div>
             </div>
-        </Card>
+        </div>
     );
 }

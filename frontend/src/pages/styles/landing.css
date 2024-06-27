@@ -14,6 +14,13 @@
     color: darkviolet;
 }
 
+.sampleImageBackground.light {
+    background-color: orange;
+}
+
+.sampleImageBackground.dark {
+    background-color: darkviolet;
+}
 
 
 /* Small devices (tablets, 4009x and up) */
@@ -25,15 +32,14 @@
     }
     
     .sampleImageBackground.light{
-        border-radius: 100%;
-        background-color: orange;
+        border-radius: 50%;
         width: 240px;
         height: 240px;
+        margin-bottom: 40px;
     }
     
     .sampleImageBackground.dark{
         border-radius: 50%;
-        background-color: darkviolet;
         width: 240px;
         height: 240px;
         margin-bottom: 40px;
@@ -49,15 +55,14 @@
     }
     
     .sampleImageBackground.light{
-        border-radius: 100%;
-        background-color: orange;
+        border-radius: 50%;
         width: 240px;
         height: 240px;
+        margin-bottom: 40px;
     }
     
     .sampleImageBackground.dark{
         border-radius: 50%;
-        background-color: darkviolet;
         width: 240px;
         height: 240px;
         margin-bottom: 40px;
@@ -73,15 +78,14 @@
     }
     
     .sampleImageBackground.light{
-        border-radius: 100%;
-        background-color: orange;
+        border-radius: 50%;
         width: 400px;
         height: 400px;
+        margin-bottom: 40px;
     }
     
     .sampleImageBackground.dark{
         border-radius: 50%;
-        background-color: darkviolet;
         width: 400px;
         height: 400px;
         margin-bottom: 40px;
