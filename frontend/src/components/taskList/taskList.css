@@ -9,3 +9,13 @@
     border: none;
     padding: 10px 20px;
 }
+
+.createTaskBtnText.light {
+    color:white;
+    margin: 0px;
+}
+
+.createTaskBtnText.dark {
+    color:white;
+    margin: 0px;
+}

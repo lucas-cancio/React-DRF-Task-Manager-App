@@ -81,7 +81,7 @@ export const TaskList = () => {
             </h1>
             <div className="d-flex flex-row justify-content-center my-3">
                 <div className="d-flex flex-column col-6 col-md-3">
-                    <button className={`createTaskBtn ${theme} rounded-pill`} title="Create new task" onClick={handleCreateNewTask} >Create New Task</button>
+                    <button className={`createTaskBtn ${theme} rounded-pill`} title="Create new task" onClick={handleCreateNewTask} ><h5 className={`createTaskBtnText ${theme}`}>Create New Task</h5></button>
                 </div>
             </div>
             {renderTasks()}
