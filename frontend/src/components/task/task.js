@@ -135,8 +135,8 @@ export default function Task({task}) {
                                 data-bs-toggle={!inEditMode ? "collapse" : undefined}
                                 data-bs-target={!inEditMode ? `#task-${task.id}-collapsible` : undefined}>
                                     
-                                <div className="d-flex flex-row justify-content-between">
-                                    <div className="d-flex flex-column">
+                                <div className="d-flex flex-row justify-content-between no-wrap overflow-hidden">
+                                    <div className="d-flex flex-column col-12 col-md-8 col-lg-10">
                                         <div className="d-flex flex-row align-items-center">
                                             {inEditMode ? (
                                                 <>
@@ -158,12 +158,12 @@ export default function Task({task}) {
                                                         title="completedCheckbox"
                                                         name="completed"
                                                     ></input>
-                                                    <h2 className={`taskTitle ${theme}`}>{task.title}</h2>
+                                                    <h2 className={`taskTitle ${theme} ps-2`}>{task.title}</h2>
                                                 </>
                                             )}
                                         </div>
                                     </div>
-                                    <div className="d-flex flex-column">
+                                    <div className="d-flex flex-column col-sm-12 col-md-2 align-items-start">
                                         <div className="d-flex flex-row">
                                             <p className="taskDeadline">
                                                 {inEditMode ? (
@@ -181,7 +181,7 @@ export default function Task({task}) {
                                                         </input>
                                                     </>
                                                 ): (
-                                                    <strong>
+                                                    <strong className="text-nowrap">
                                                         {task.deadline}    
                                                     </strong>
                                                 )}
@@ -191,9 +191,9 @@ export default function Task({task}) {
                                 </div>
                             </button>
 
-                            <div className={`task-collapsible-section ${theme} collapse py-3 px-4`} id={`task-${task.id}-collapsible`} data-testid="taskCollapsible">
+                            <div className={`task-collapsible-section ${theme} collapse`} id={`task-${task.id}-collapsible`} data-testid="taskCollapsible">
 
-                                <div className="taskDescriptionContainer d-flex flex-row mt-3 ms-4">
+                                <div className="taskDescriptionContainer d-flex flex-row">
                                     <div className="d-flex flex-columm col-12">
                                         {inEditMode ? (
                                             <>

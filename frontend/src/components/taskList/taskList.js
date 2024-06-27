@@ -73,14 +73,14 @@ export const TaskList = () => {
     };
 
     return (
-        <div className="d-flex flex-column col-md-12 col-lg-6 text-center">
+        <div className="d-flex flex-column col-12 col-md-10 col-lg-8 text-center">
             <h1 className="mt-5 my-3 pt-5">
                 <strong>
                     Your Tasks
                 </strong>
             </h1>
             <div className="d-flex flex-row justify-content-center my-3">
-                <div className="d-flex flex-column col-3">
+                <div className="d-flex flex-column col-6 col-md-3">
                     <button className={`createTaskBtn ${theme} rounded-pill`} title="Create new task" onClick={handleCreateNewTask} >Create New Task</button>
                 </div>
             </div>

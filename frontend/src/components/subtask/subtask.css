@@ -5,3 +5,25 @@
 .subtask-input.dark {
     background-color: lightgray;
 }
+
+
+/* Small devices (desktops, 0px and up) */
+@media (min-width: 0px) {
+    .subtaskDeadline {
+        margin: 12px 0px 8px 24px;
+    }
+}
+  
+/* Medium devices (desktops, 900px and up) */
+@media (min-width: 900px) {
+    .subtaskDeadline {
+        margin: 0px;
+    }
+}
+  
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .subtaskDeadline {
+        margin-top: 0px;
+    }
+}
