@@ -89,7 +89,7 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row">
                                     <label htmlFor={`subtask-#${subtask.id}-title`}>Subtask Title</label>
-                                    <input className={`subtask-input ${theme}`} 
+                                    <input className={`subtask-input ${theme} ms-3`} 
                                         id={`subtask-#${subtask.id}-title`} 
                                         type="text" value={subtask.title} 
                                         onChange={handleChange}
@@ -99,7 +99,7 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                             </div>
                             <div>
                                 <label htmlFor={`subtask-#${subtask.id}-deadline`}>Deadline</label>
-                                <input className={`subtask-input ${theme}`} 
+                                <input className={`subtask-input ${theme} ms-3`} 
                                     id={`subtask-#${subtask.id}-deadline`} 
                                     type="date" value={subtask.deadline} 
                                     onChange={handleChange}
@@ -118,7 +118,7 @@ export default function Subtask({subtask, updateEditedSubtaskList, inEditMode=fa
                         <div className="subtaskDescriptionContainer d-flex flex-row justify-content-between ms-5">
                             <div className="d-flex flex-columm">
                                 <label htmlFor={`subtask-#${subtask.id}-description`}>Description</label>
-                                <input className={`subtask-input ${theme}`} 
+                                <input className={`subtask-input ${theme} ms-3`} 
                                     id={`subtask-#${subtask.id}-description`} 
                                     type="text" value={subtask.description} 
                                     onChange={handleChange}

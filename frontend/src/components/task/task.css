@@ -24,6 +24,10 @@ input[type='checkbox'].big-checkbox:checked {
     background-color: #2e2733;
 }
 
+.task-btn {
+    border: none;
+}
+
 .task-btn.light {
     background-color: white;
 }
@@ -38,6 +42,11 @@ input[type='checkbox'].big-checkbox:checked {
 
 .task-btn.dark:hover {
     background-color: blue;
+}
+
+.task-input {
+    border: none;
+    padding: 4px 8px;
 }
 
 .task-input.light {

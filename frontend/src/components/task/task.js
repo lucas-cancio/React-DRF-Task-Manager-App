@@ -129,19 +129,19 @@ export default function Task({task}) {
                         <div className="d-flex flex-column col-12">
                             
                             <button 
-                                className="taskHeaderCollapseBtn px-4 py-2"
+                                className="taskHeaderCollapseBtn px-3 py-3"
                                 type="button" 
                                 data-testid="taskHeaderCollapseBtn"
                                 data-bs-toggle={!inEditMode ? "collapse" : undefined}
                                 data-bs-target={!inEditMode ? `#task-${task.id}-collapsible` : undefined}>
                                     
                                 <div className="d-flex flex-row justify-content-between no-wrap overflow-hidden">
-                                    <div className="d-flex flex-column col-12 col-md-8 col-lg-10">
+                                    <div className="d-flex flex-column col-12 col-md-8 col-lg-8">
                                         <div className="d-flex flex-row align-items-center">
                                             {inEditMode ? (
                                                 <>
                                                     <label htmlFor={`task-#${task.id}-title-input`}>Task Title</label>
-                                                    <input className={`task-input ${theme}`} 
+                                                    <input className={`task-input ${theme} ms-3`} 
                                                         id={`task-#${task.id}-title-input`} 
                                                         form={`task-#${task.id}-form`} 
                                                         value={task.title}
@@ -163,14 +163,14 @@ export default function Task({task}) {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="d-flex flex-column col-sm-12 col-md-2 align-items-start">
-                                        <div className="d-flex flex-row">
+                                    <div className="d-flex flex-column col-sm-12 col-md-4 align-items-end">
+                                        <div className="d-flex flex-row justify-content-end">
                                             <p className="taskDeadline">
                                                 {inEditMode ? (
                                                     <>
                                                         <label htmlFor={`task-#${task.id}-deadline-input`} >Deadline</label>
                                                         <input 
-                                                            className={`task-input ${theme}`} 
+                                                            className={`task-input ${theme} ms-2`} 
                                                             id={`task-#${task.id}-deadline-input`} 
                                                             form={`task-#${task.id}-form`} 
                                                             type="date" 
@@ -198,7 +198,7 @@ export default function Task({task}) {
                                         {inEditMode ? (
                                             <>
                                                 <label htmlFor={`task-#${task.id}-description-input`}>Task Description</label>
-                                                <input className={`task-input ${theme}`} 
+                                                <input className={`task-input ${theme} ms-3`} 
                                                     id={`task-#${task.id}-description-input`} 
                                                     form={`task-#${task.id}-form`} 
                                                     type="text" 
@@ -263,7 +263,6 @@ export default function Task({task}) {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </form>
                 </Card>
