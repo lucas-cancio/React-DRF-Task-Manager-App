@@ -1,0 +1,58 @@
+.loginFormLeftContainer.light {
+    background-color: white;
+}
+
+.loginFormLeftContainer.dark {
+    background-color: rgb(38, 36, 46);
+}
+
+.loginFormRightContainer.light {
+    background: linear-gradient(to right, rgb(236, 95, 0), orange);
+    color: white;
+}
+
+.loginFormRightContainer.dark {
+    background: linear-gradient(to right, rgb(98, 0, 211), darkviolet);
+    color: white;
+}
+
+.normalLoginInput {
+    width: 100%;
+    border: none;
+    background: linear-gradient(to right, rgb(241, 241, 241), rgb(228, 228, 228));
+    padding: 10px 20px;
+}
+
+.loginSubmitInput.light {
+    width: 100%;
+    background: linear-gradient(to right, rgb(236, 95, 0), orange);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+.loginSubmitInput.dark {
+    width: 100%;
+    background: linear-gradient(to right, rgb(98, 0, 211), darkviolet);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+.signupLink.light {
+    text-decoration: none;
+    border: solid;
+    border-width: 2px;
+    border-color: white;
+    padding: 10px;
+    color: white;
+}
+
+.signupLink.dark {
+    text-decoration: none;
+    border: solid;
+    border-width: 2px;
+    border-color: white;
+    padding: 10px;
+    color: white;
+}

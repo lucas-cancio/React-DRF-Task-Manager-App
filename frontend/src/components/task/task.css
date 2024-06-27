@@ -15,13 +15,17 @@ input[type='checkbox'].big-checkbox:checked {
 }
 
 .task-collapsible-section.light {
-    border-top-style: solid;
+    border-top-style: none;
     background-color: #dbccb2;
 }
 
 .task-collapsible-section.dark {
-    border-top-style: solid;
+    border-top-style: none;
     background-color: #2e2733;
+}
+
+.task-btn {
+    border: none;
 }
 
 .task-btn.light {
@@ -40,10 +44,56 @@ input[type='checkbox'].big-checkbox:checked {
     background-color: blue;
 }
 
+.task-input {
+    border: none;
+    padding: 4px 8px;
+}
+
 .task-input.light {
     background-color: white;
 }
 
 .task-input.dark {
     background-color: lightgray;
+}
+
+.taskTitle.light {
+    color: black;
+}
+
+.taskTitle.dark {
+    color: lightsteelblue;
+}
+
+/* Small devices (desktops, 0px and up) */
+@media (min-width: 0px) {
+    .task-collapsible-section {
+        padding: 8px;
+    }
+
+    .taskDescriptionContainer {
+        margin: 12px 0px 0px 8px;
+    }
+}
+  
+/* Medium devices (desktops, 900px and up) */
+@media (min-width: 900px) {
+    .task-collapsible-section {
+        padding: 4px;
+    }
+
+    .taskDescriptionContainer {
+        margin: 12px 0px 0px 12px;
+    }
+}
+  
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .task-collapsible-section {
+        padding: 4px;
+    }
+
+    .taskDescriptionContainer {
+        margin: 16px 0px 0px 16px;
+    }
 }

@@ -30,6 +30,7 @@ export default function Task({task}) {
 
         let { name, value } = event.target;
         if (event.target.type === "checkbox"){
+            event.stopPropagation();
             value = event.target.checked;
         }
         
@@ -128,19 +129,19 @@ export default function Task({task}) {
                         <div className="d-flex flex-column col-12">
                             
                             <button 
-                                className="taskHeaderCollapseBtn px-4 py-2"
+                                className="taskHeaderCollapseBtn px-3 py-3"
                                 type="button" 
                                 data-testid="taskHeaderCollapseBtn"
                                 data-bs-toggle={!inEditMode ? "collapse" : undefined}
                                 data-bs-target={!inEditMode ? `#task-${task.id}-collapsible` : undefined}>
                                     
-                                <div className="d-flex flex-row justify-content-between">
-                                    <div className="d-flex flex-column">
+                                <div className="d-flex flex-row justify-content-between no-wrap overflow-hidden">
+                                    <div className="d-flex flex-column col-12 col-md-8 col-lg-8">
                                         <div className="d-flex flex-row align-items-center">
                                             {inEditMode ? (
                                                 <>
                                                     <label htmlFor={`task-#${task.id}-title-input`}>Task Title</label>
-                                                    <input className={`task-input ${theme}`} 
+                                                    <input className={`task-input ${theme} ms-3`} 
                                                         id={`task-#${task.id}-title-input`} 
                                                         form={`task-#${task.id}-form`} 
                                                         value={task.title}
@@ -157,19 +158,19 @@ export default function Task({task}) {
                                                         title="completedCheckbox"
                                                         name="completed"
                                                     ></input>
-                                                    <h2 className="taskTitle">{task.title}</h2>
+                                                    <h2 className={`taskTitle ${theme} ps-2`}>{task.title}</h2>
                                                 </>
                                             )}
                                         </div>
                                     </div>
-                                    <div className="d-flex flex-column">
-                                        <div className="d-flex flex-row">
+                                    <div className="d-flex flex-column col-sm-12 col-md-4 align-items-end">
+                                        <div className="d-flex flex-row justify-content-end">
                                             <p className="taskDeadline">
                                                 {inEditMode ? (
                                                     <>
                                                         <label htmlFor={`task-#${task.id}-deadline-input`} >Deadline</label>
                                                         <input 
-                                                            className={`task-input ${theme}`} 
+                                                            className={`task-input ${theme} ms-2`} 
                                                             id={`task-#${task.id}-deadline-input`} 
                                                             form={`task-#${task.id}-form`} 
                                                             type="date" 
@@ -180,7 +181,7 @@ export default function Task({task}) {
                                                         </input>
                                                     </>
                                                 ): (
-                                                    <strong>
+                                                    <strong className="text-nowrap">
                                                         {task.deadline}    
                                                     </strong>
                                                 )}
@@ -190,14 +191,14 @@ export default function Task({task}) {
                                 </div>
                             </button>
 
-                            <div className={`task-collapsible-section ${theme} collapse py-3 px-4`} id={`task-${task.id}-collapsible`} data-testid="taskCollapsible">
+                            <div className={`task-collapsible-section ${theme} collapse`} id={`task-${task.id}-collapsible`} data-testid="taskCollapsible">
 
-                                <div className="taskDescriptionContainer d-flex flex-row mt-3 ms-4">
+                                <div className="taskDescriptionContainer d-flex flex-row">
                                     <div className="d-flex flex-columm col-12">
                                         {inEditMode ? (
                                             <>
                                                 <label htmlFor={`task-#${task.id}-description-input`}>Task Description</label>
-                                                <input className={`task-input ${theme}`} 
+                                                <input className={`task-input ${theme} ms-3`} 
                                                     id={`task-#${task.id}-description-input`} 
                                                     form={`task-#${task.id}-form`} 
                                                     type="text" 
@@ -262,7 +263,6 @@ export default function Task({task}) {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </form>
                 </Card>

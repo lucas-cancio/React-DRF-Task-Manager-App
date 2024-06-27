@@ -81,7 +81,7 @@ describe("Login form", () => {
 
         const usernameInput = screen.getByLabelText("Username");
         const passowrdInput = screen.getByLabelText("Password");
-        const loginFormSubmitBtn = screen.getByRole("button", { name: "Submit"});
+        const loginFormSubmitBtn = screen.getByRole("button", { name: "Log In"});
 
         // Fill in the form
         fireEvent.change(usernameInput, { target: { value: mockCredentials.username} });
@@ -122,7 +122,7 @@ describe("Login form", () => {
 
         const usernameInput = screen.getByLabelText("Username");
         const passowrdInput = screen.getByLabelText("Password");
-        const loginFormSubmitBtn = screen.getByRole("button", { name: "Submit"});
+        const loginFormSubmitBtn = screen.getByRole("button", { name: "Log In"});
 
         // Fill in the form
         fireEvent.change(usernameInput, { target: { value: mockCredentials.username} });
@@ -166,7 +166,7 @@ describe("Login form", () => {
 
         const usernameInput = screen.getByLabelText("Username");
         const passowrdInput = screen.getByLabelText("Password");
-        const loginFormSubmitBtn = screen.getByRole("button", { name: "Submit"});
+        const loginFormSubmitBtn = screen.getByRole("button", { name: "Log In"});
 
         // Fill in the form
         fireEvent.change(usernameInput, { target: { value: mockCredentials.username} });

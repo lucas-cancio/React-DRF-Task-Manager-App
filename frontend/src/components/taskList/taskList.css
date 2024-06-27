@@ -1,0 +1,21 @@
+.createTaskBtn.light {
+    background: linear-gradient(to top, rgb(236, 95, 0), orange);
+    border: none;
+    padding: 10px 20px;
+}
+
+.createTaskBtn.dark {
+    background: linear-gradient(to right, rgb(98, 0, 211), darkviolet);
+    border: none;
+    padding: 10px 20px;
+}
+
+.createTaskBtnText.light {
+    color:white;
+    margin: 0px;
+}
+
+.createTaskBtnText.dark {
+    color:white;
+    margin: 0px;
+}

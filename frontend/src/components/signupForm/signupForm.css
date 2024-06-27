@@ -1,0 +1,31 @@
+.signupFormContainer.light {
+    background-color: white;
+}
+
+.signupFormContainer.dark {
+    background-color: rgb(38, 36, 46);
+}
+
+.normalInput {
+    background: linear-gradient(to right, rgb(241, 241, 241), rgb(228, 228, 228));
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+
+.signupSubmitInput.light {
+    width: 100%;
+    background: linear-gradient(to right, rgb(236, 95, 0), orange);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+.signupSubmitInput.dark {
+    width: 100%;
+    background: linear-gradient(to right, rgb(98, 0, 211), darkviolet);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+}
