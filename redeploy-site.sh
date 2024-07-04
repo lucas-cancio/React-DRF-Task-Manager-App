@@ -8,4 +8,6 @@ cd frontend
 npm run build
 
 sudo chown -R ec2-user:nginx build
-chmod -R 750 build 
+chmod -R 750 build
+
+cd ../
