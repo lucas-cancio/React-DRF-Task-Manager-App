@@ -22,7 +22,7 @@ TaskMaster is here to help you stay on track and get things done.`;
                         <div className="d-flex flex-row justify-content-center align-items-center p-3 py-5 mt-5 flex-wrap">
                             <div className="d-flex flex-column justify-content-start align-items-center col-sm-9 col-md-8 col-lg-6 pb-3">
                                 <div className="d-flex flex-row">
-                                    <h1 className="m-1">Welcome to <strong className={`coloredText ${theme}`}>TaskMaster</strong></h1>
+                                    <h1 className="m-1">*DELETEME*Welcome to <strong className={`coloredText ${theme}`}>TaskMaster</strong></h1>
                                 </div>
                                 <div className="d-flex flex-row my-2">
                                     <h5 className="m-1 text-wrap">Stay Organized, Stay Productive</h5>
