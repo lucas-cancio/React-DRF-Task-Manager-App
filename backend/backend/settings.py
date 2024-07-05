@@ -86,24 +86,27 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-if (DEBUG == True):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
+# 'ENGINE': 'django.db.backends.sqlite3',
+# 'NAME': BASE_DIR / 'db.sqlite3',
+            # 'ENGINE': "django.db.backends.sqlite3",
+            # 'NAME': "C:\\Users\\lucas\\Documents\\Other\\Python Practice\\(Full-stack) Dev Stuff\\DRF_Todo_App\\backend\\db.sqlite3",
+DATABASES = {
         'default': {
             'ENGINE': os.getenv("DB_ENGINE"),
             'NAME': os.getenv("DB_NAME"),
-            'USER': os.getenv("DB_USER"),
-            'PASSWORD': os.getenv("DB_PASSWORD"),
-            'HOST': os.getenv("DB_HOST"), 
-            'PORT': os.getenv("DB_PORT"),
-        }
-    }
+        } 
+    } 
+# if DEBUG == True else {
+#         'default': {
+#         } 
+#     }
+
+# if (DEBUG == True):
+# else:
+#     DATABASES = {
+#         'default': {
+#         }
+#     }
 
 
 # Password validation
