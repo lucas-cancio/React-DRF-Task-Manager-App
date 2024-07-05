@@ -6,7 +6,7 @@ export function GetCSRFToken({csrfToken, csrfTokenSetter}) {
         return;
     }
 
-    axios.get("http://localhost:8000/api/getCSRFToken/", {
+    axios.get("".concat(process.env.REACT_APP_BACKEND_DOMAIN_NAME,"/api/getCSRFToken/"), {
         withCredentials: true,
     })
         .then((res) => {

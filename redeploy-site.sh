@@ -7,7 +7,11 @@ pip install -r requirements.txt
 cd frontend
 npm run build
 
-sudo chown -R ec2-user:nginx build
-chmod -R 750 build
+cd /home/React-DRF-Task-Manager-App
 
-cd ../
+# Set appropriate permissions for repo
+sudo chown -R ec2-user:nginx /home/React-DRF-Task-Manager-App
+chmod -R 770 /home/React-DRF-Task-Manager-App
+
+# Set appropriate permissions for React build files
+chmod -R 750 /home/React-DRF-Task-Manager-App/frontend/build
