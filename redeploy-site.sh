@@ -2,7 +2,7 @@ git fetch
 git reset origin/main --hard
 
 source venv/bin/activate
-pip install -r requirements.txt
+python3.12 -m pip install -r requirements.txt
 
 cd frontend
 npm run build
