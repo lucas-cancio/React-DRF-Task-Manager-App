@@ -34,7 +34,12 @@ SECRET_KEY = os.getenv('DJANGO_JWT_SECRET_KEY')
 # SECURITY WARNING: don't run  withdebug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+#[        'localhost', 
+#        'backend.tutac.xyz', 
+#        'tutac.xyz',
+#        '52.90.161.8'
+#        ]
 
 # Application definition
 
@@ -144,6 +149,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -179,9 +185,12 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    'http://localhost',
+    'http://127.0.0.1',
     ]
+
+SESSION_COOKIE_DOMAIN = '.tutac.xyz'
+CSRF_COOKIE_DOMAIN = '.tutac.xyz'
 
 
 REST_FRAMEWORK = {
