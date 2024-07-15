@@ -50,8 +50,8 @@ class LoginView(APIView):
 
 
 def logoutView(request):
-    if not request.user.is_authenticated:
-        return JsonResponse({'detail': 'You\'re not logged in.'}, status=400)
+    #if not request.user.is_authenticated:
+    #    return JsonResponse({'detail': 'You\'re not logged in.'}, status=400)
         
     logout(request)
     response = JsonResponse({'detail': 'Successfully logged out'})

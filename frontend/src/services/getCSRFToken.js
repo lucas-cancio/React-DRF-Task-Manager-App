@@ -6,8 +6,9 @@ export function GetCSRFToken({csrfToken, csrfTokenSetter}) {
         return;
     }
 
-    axios.get("".concat(process.env.REACT_APP_BACKEND_DOMAIN_NAME,"/api/getCSRFToken/"), {
-        withCredentials: true,
+    //axios.get("".concat(process.env.REACT_APP_BACKEND_DOMAIN_NAME,"/api/getCSRFToken/"), {
+    axios.get("http://backend.tutac.xyz/api/getCSRFToken/", { 
+	withCredentials: true,
     })
         .then((res) => {
             console.log("Successfully retrieved CSRF Token");

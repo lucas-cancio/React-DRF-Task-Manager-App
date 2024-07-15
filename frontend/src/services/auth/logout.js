@@ -6,7 +6,7 @@ export default function LogOut() {
         api.get("/api/logout/",
             {
                 headers: {
-                    "Require-Auth": false,
+                    "Require-Auth": true,
                 },
                 withCredentials: true,
             }

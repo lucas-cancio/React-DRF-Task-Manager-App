@@ -2,9 +2,10 @@ import axios from "axios";
 import { jwtDecode } from 'jwt-decode'
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_DOMAIN_NAME,
+	baseURL: 'http://backend.tutac.xyz',
     timeout: 5000
 });
+// baseURL: process.env.REACT_APP_BACKEND_DOMAIN_NAME
 
 // Decode JWT and get expiration timeout
 const getExpirationTime = (token) => {
