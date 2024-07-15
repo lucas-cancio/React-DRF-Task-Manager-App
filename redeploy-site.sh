@@ -15,3 +15,5 @@ chmod -R 770 /home/React-DRF-Task-Manager-App
 
 # Set appropriate permissions for React build files
 chmod -R 750 /home/React-DRF-Task-Manager-App/frontend/build
+
+sudo systemctl restart gunicorn
